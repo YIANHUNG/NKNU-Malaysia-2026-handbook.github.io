@@ -12,7 +12,7 @@
 :root{
   --paper:#fdf6ef; --sheet:#fffaf5; --ink:#3a2a20; --muted:#8a7263; --line:#efdccb;
   --accent:#e2661c; --accent-soft:#fde6d4; --accent-ink:#b44a0c;
-  --sky-tint:#f7d9e8; --sky-ink:#9b3a6b; --sun-tint:#fbefb5; --sun-ink:#7d6200;
+  --sky-tint:#f7d9e8; --sky-ink:#9b3a6b; --sun-tint:#fbefb5; --sun-ink:#7d6200; --teal-tint:#d8efe8; --teal-ink:#1d6656;
   --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
   --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
@@ -20,11 +20,11 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#1d1612; --sheet:#261d18; --ink:#f3e6da; --muted:#b39b8a; --line:#3d2f27;
   --accent:#f08a45; --accent-soft:#3e2516; --accent-ink:#ffb07a;
-  --sky-tint:#3c2131; --sky-ink:#f2a6cd; --sun-tint:#38311a; --sun-ink:#ecd77a; color-scheme:dark}}
+  --sky-tint:#3c2131; --sky-ink:#f2a6cd; --sun-tint:#38311a; --sun-ink:#ecd77a; --teal-tint:#173630; --teal-ink:#8fd8c4; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#1d1612; --sheet:#261d18; --ink:#f3e6da; --muted:#b39b8a; --line:#3d2f27;
   --accent:#f08a45; --accent-soft:#3e2516; --accent-ink:#ffb07a;
-  --sky-tint:#3c2131; --sky-ink:#f2a6cd; --sun-tint:#38311a; --sun-ink:#ecd77a; color-scheme:dark}
+  --sky-tint:#3c2131; --sky-ink:#f2a6cd; --sun-tint:#38311a; --sun-ink:#ecd77a; --teal-tint:#173630; --teal-ink:#8fd8c4; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.8;margin:0}
@@ -176,6 +176,67 @@ figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .office .kv dt{font-size:14px;color:var(--accent-ink)}
 .urgent{color:var(--accent-ink);font-weight:700;font-variant-numeric:tabular-nums}
 
+
+/* ch.11 schedule */
+.tbl-wrap{overflow-x:auto;margin:0 0 12px}
+.fee{border-collapse:collapse;width:100%;min-width:420px;font-variant-numeric:tabular-nums;font-size:15px}
+.fee th,.fee td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+.fee th{font-size:13px;color:var(--muted);font-weight:500}
+.fee td.num,.fee th.num{text-align:right}
+.fee tfoot td{font-weight:700;color:var(--accent-ink);border-bottom:0}
+.room{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:6px 0 12px}
+.room small{color:var(--muted);font-size:13px}
+.room .maplink{margin:0}
+.cls-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px}
+.cls-card{background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:0}
+.cls-card .nm{font-family:var(--serif);font-weight:700;font-size:18px}
+.cls-card .sub{font-size:13px;color:var(--muted);margin-bottom:6px}
+.cls-card ul{list-style:none;padding:0;margin:0;display:grid;gap:4px;font-size:14px;line-height:1.5}
+.cls-card li b{font-variant-numeric:tabular-nums}
+.cls-card .role{font-size:12px;border-radius:4px;padding:0 6px;margin-right:4px;background:var(--accent-soft);color:var(--accent-ink)}
+.cls-card .role.r2{background:var(--teal-tint);color:var(--teal-ink)}
+.sc-ctl{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin-bottom:12px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:14px;line-height:1.4;border:1px solid var(--line);background:var(--sheet);color:var(--ink);border-radius:999px;padding:4px 13px;cursor:pointer}
+.seg button:hover{border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.seg button small{font-family:var(--mono);font-size:12px;opacity:.85;margin-left:4px}
+.sc-legend{margin:0 0 10px}
+.t-class{background:var(--accent-soft);color:var(--accent-ink)}
+.t-admin{background:var(--teal-tint);color:var(--teal-ink)}
+.t-home{background:var(--sun-tint);color:var(--sun-ink)}
+.t-all{background:var(--sky-tint);color:var(--sky-ink)}
+.t-other{background:var(--line);color:var(--ink)}
+.sc-desk{overflow-x:auto}
+table.sc{border-collapse:separate;border-spacing:0;width:100%;min-width:660px;table-layout:fixed}
+table.sc th,table.sc td{border-bottom:1px solid var(--line);padding:6px 5px;vertical-align:top;text-align:left}
+table.sc thead th{font-weight:500;font-size:13px;color:var(--muted);padding-bottom:8px}
+table.sc thead th b{display:block;font-family:var(--mono);font-size:15px;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+table.sc th.p{width:64px;font-size:12px;color:var(--muted);font-weight:400;line-height:1.35}
+table.sc th.p b{display:block;font-family:var(--mono);font-size:16px;color:var(--accent);font-weight:500}
+table.sc tr.bar td{background:var(--paper);color:var(--muted);font-size:12px;padding:3px 8px;text-align:center;letter-spacing:.1em}
+table.sc .today{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+table.sc thead th.today b{color:var(--accent-ink)}
+.ev{display:block;border-radius:6px;padding:4px 7px;font-size:13px;line-height:1.4;margin-bottom:3px;word-break:break-word}
+.ev b{font-weight:700}
+.ev .loc{display:block;opacity:.85;font-size:12px}
+.ev.mini{padding:2px 6px;font-size:12px}
+.ev.mini b{margin-right:4px}
+.sc-mob .seg{margin-bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.sc-mob .seg button{padding:4px 2px;border-radius:8px;display:flex;flex-direction:column;align-items:center;line-height:1.3}
+.sc-mob .seg button small{margin-left:0}
+.sc-list{list-style:none;padding:0;margin:0}
+.sc-list li{display:grid;grid-template-columns:4.4em 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.sc-list li>*{min-width:0}
+.sc-list .tm{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.4}
+.sc-list .tm b{display:block;font-size:16px;color:var(--accent);font-weight:500}
+.sc-list li.bar{display:block;text-align:center;color:var(--muted);font-size:12px;background:var(--paper);padding:4px 0;letter-spacing:.1em}
+.sc-list .none{color:var(--muted);font-size:13px}
+.sc-note{font-size:13px;color:var(--muted);margin-top:10px}
+.day-link{display:inline-block;margin-top:8px;font-size:13px;text-decoration:none;color:var(--accent-ink)}
+.day-link:hover{text-decoration:underline}
+@media (max-width:640px){.sc-desk{display:none}}
+@media (min-width:641px){.sc-mob{display:none}}
 footer{padding-block:48px;color:var(--muted);font-size:13px;text-align:center}
 @media (max-width:480px){
   .fest div,.tips li{grid-template-columns:1fr;gap:0}
@@ -215,6 +276,7 @@ html{scroll-behavior:smooth}
     <li><a href="#packing"><b>08</b>攜帶清單</a></li>
     <li><a href="#team"><b>09</b>任務編組</a></li>
     <li><a href="#embassy"><b>10</b>駐馬辦事處</a></li>
+    <li><a href="#sched"><b>11</b>課表</a></li>
   </ol>
 </nav>
 
@@ -506,6 +568,65 @@ html{scroll-behavior:smooth}
   </div>
 </section>
 
+<section id="sched">
+  <div class="ch-head"><span class="ch-num">11</span><h2>見習課表與相關事項</h2></div>
+
+  <h3>相關事項</h3>
+  <dl class="kv">
+    <dt>見習時間</dt><dd>2026/11/16（一）至 11/28（六）</dd>
+    <dt>歡迎會</dt><dd>11/17（二）8:00–9:40・會議室（暫定）</dd>
+    <dt>座談會/結業式</dt><dd>11/27（五）15:20・會議室（暫定）</dd>
+  </dl>
+
+  <h4>住宿費與餐費</h4>
+  <div class="tbl-wrap"><table class="fee">
+    <thead><tr><th>項目</th><th class="num">單價</th><th>天數</th><th class="num">每人小計</th></tr></thead>
+    <tbody>
+      <tr><td>早餐</td><td class="num">RM7／餐</td><td>9 天（11/17–20、11/23–27）</td><td class="num">RM63</td></tr>
+      <tr><td>午餐</td><td class="num">RM12／餐</td><td>9 天（11/17–20、11/23–27）</td><td class="num">RM108</td></tr>
+      <tr><td>住宿</td><td class="num">RM100／晚</td><td>13 晚（11/16–28）</td><td class="num">RM1,300</td></tr>
+    </tbody>
+    <tfoot><tr><td colspan="3">每人合計</td><td class="num">RM1,471</td></tr></tfoot>
+  </table></div>
+  <p class="muted">晚餐可以另外訂，有需要再告知校方。</p>
+
+  <h4>行政見習</h4>
+  <p>國文專長的見習生協助教務處辦理中學部華語好書分享比賽。五位見習生輪流到教務處、學務處、總務處和圖書館見習，各自的時段見下方課表。</p>
+
+  <h4>住宿</h4>
+  <div class="room">
+    <a class="maplink" href="https://docs.google.com/spreadsheets/d/1DDqs04ZUQQNHTMw00AALJSgwWLBrFoJT-eKGsXzoKvk/edit" target="_blank" rel="noopener">查看住宿分配（限團隊成員）↗</a>
+    <small>需要登入 Google，只有團隊成員的帳號打得開</small>
+  </div>
+  <ul>
+    <li>宿舍有洗衣機和烘衣機，可以洗衣服。</li>
+    <li>宿舍請自行打掃，教職員宿舍晚間請保持安靜。</li>
+  </ul>
+
+  <h4>行前提醒</h4>
+  <ul>
+    <li>早、午餐的餐具和水瓶請自備。</li>
+    <li>近日馬來西亞常有大雨，記得帶雨具。</li>
+    <li>馬來西亞電壓為 220V，插座形狀也和臺灣不同，須帶轉接插頭。</li>
+  </ul>
+
+  <h3>班級資訊</h3>
+  <div class="cls-grid" id="clsGrid"></div>
+
+  <h3>課表</h3>
+  <div class="sc-ctl">
+    <div class="seg" id="scWho" role="group" aria-label="選擇見習生"></div>
+    <div class="seg" id="scWeek" role="group" aria-label="選擇週次"></div>
+  </div>
+  <div class="legend sc-legend"><span><i class="t-class"></i>觀課/試教</span><span><i class="t-admin"></i>行政實習</span><span><i class="t-home"></i>導師見習</span><span><i class="t-all"></i>全體活動</span></div>
+  <div class="sc-desk" id="scDesk"></div>
+  <div class="sc-mob">
+    <div class="seg" id="scDay" role="group" aria-label="選擇日期"></div>
+    <ol class="sc-list" id="scList"></ol>
+  </div>
+  <p class="sc-note" id="scSrc"></p>
+</section>
+
 </main>
 <footer>國立高雄師範大學 115 學年度國外教育見習・版面設計 洪懌安</footer>
 
@@ -515,17 +636,17 @@ html{scroll-behavior:smooth}
   var A=['學校行政、班級經營、教學見習與備課'];
   var days=[
     {d:'11/16',w:'一',t:'travel',p:'桃園國際機場搭機出發，前往馬來西亞吉隆坡'},
-    {d:'11/17',w:'二',items:['兩校相見歡（簽約儀式）',A[0],'反思會議']},
-    {d:'11/18',w:'三',items:[A[0],'反思會議']},
-    {d:'11/19',w:'四',items:[A[0],'反思會議']},
-    {d:'11/20',w:'五',items:[A[0],'反思會議']},
+    {d:'11/17',w:'二',k:[1,1],items:['8:00 歡迎會（會議室）','兩校相見歡（簽約儀式）',A[0],'15:20 反思會議']},
+    {d:'11/18',w:'三',k:[1,2],items:[A[0],'反思會議']},
+    {d:'11/19',w:'四',k:[1,3],items:[A[0],'反思會議']},
+    {d:'11/20',w:'五',k:[1,4],items:[A[0],'14:20 共同討論（圖書館）','反思會議']},
     {d:'11/21',w:'六',t:'culture',p:'市中心文化參訪'},
     {d:'11/22',w:'日',t:'culture',p:'探索吉隆坡歷史建築與市集文化'},
-    {d:'11/23',w:'一',items:[A[0],'試教與議課','反思會議']},
-    {d:'11/24',w:'二',items:[A[0],'試教與議課','反思會議']},
-    {d:'11/25',w:'三',items:[A[0],'試教與議課','反思會議']},
-    {d:'11/26',w:'四',items:[A[0],'試教與議課','反思會議']},
-    {d:'11/27',w:'五',items:[A[0],'試教與議課','反思會議','結業式（大合照）']},
+    {d:'11/23',w:'一',k:[2,0],items:[A[0],'試教與議課','反思會議']},
+    {d:'11/24',w:'二',k:[2,1],items:[A[0],'試教與議課','反思會議']},
+    {d:'11/25',w:'三',k:[2,2],items:[A[0],'試教與議課','反思會議']},
+    {d:'11/26',w:'四',k:[2,3],items:[A[0],'試教與議課','反思會議']},
+    {d:'11/27',w:'五',k:[2,4],items:[A[0],'試教與議課','反思會議','15:20 座談會/結業式（大合照）']},
     {d:'11/28',w:'六',t:'travel',p:'搭機回臺灣（桃園國際機場）'}
   ];
   var now=new Date(), today=(now.getMonth()+1)+'/'+now.getDate(), y=now.getFullYear();
@@ -535,6 +656,7 @@ html{scroll-behavior:smooth}
     el.className='day'+(x.t?' '+x.t:'')+(y===2026&&('11/'+x.d.split('/')[1])===today&&x.d.indexOf('11/')===0?' today':'');
     var h='<div><span class="d">'+x.d+'</span><span class="w">星期'+x.w+'</span></div>';
     if(x.p) h+='<p>'+x.p+'</p>'; else h+='<ol>'+x.items.map(function(i){return '<li>'+i+'</li>'}).join('')+'</ol>';
+    if(x.k) h+='<a class="day-link" href="#sched" data-w="'+x.k[0]+'" data-d="'+x.k[1]+'">看當天課表 →</a>';
     el.innerHTML=h; box.appendChild(el);
   });
   // countdown
@@ -641,6 +763,133 @@ html{scroll-behavior:smooth}
     function fallback(){var r=document.createRange();r.selectNodeContents(b.parentNode.firstChild.nodeType===3?b.parentNode:b.parentNode);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已選取，請手動複製'}
     try{navigator.clipboard.writeText(t).then(ok,fallback)}catch(err){fallback()}
   });
+
+
+  // ---------- ch.11 schedule (data from Google Sheet, with offline fallback) ----------
+  (function(){
+    var SHEET_ID='1SQmuB3Zj9pis326P3nelRM-HhRHxP0lBpKG13ckx1J4';
+    var SNAP_DATE='2026/10/22';
+    var SNAP={"students":[{"姓名":"何君慧","簡稱":"君慧","科目":"中學生物","任課老師":"張碩傑老師"},{"姓名":"詹沁洋","簡稱":"沁洋","科目":"中學國文","任課老師":"張博凱老師"},{"姓名":"范名妤","簡稱":"名妤","科目":"中學英文","任課老師":"Anne 老師"},{"姓名":"張簡煒庭","簡稱":"煒庭","科目":"中學數學","任課老師":"柯尚彬老師"},{"姓名":"洪懌安","簡稱":"懌安","科目":"中學國文","任課老師":"鍾侃恬老師"}],"classes":[{"姓名":"何君慧","班級":"國三","人數":"18","身分":"導師班","老師":"張碩傑老師"},{"姓名":"詹沁洋","班級":"國一","人數":"26","身分":"導師班","老師":"張博凱老師"},{"姓名":"范名妤","班級":"國二","人數":"18","身分":"導師班","老師":"鍾侃恬老師"},{"姓名":"張簡煒庭","班級":"國一","人數":"26","身分":"導師班","老師":"張博凱老師"},{"姓名":"洪懌安","班級":"國二","人數":"18","身分":"導師班","老師":"鍾侃恬老師"},{"姓名":"洪懌安","班級":"高一","人數":"21","身分":"任課班","老師":"鍾侃恬老師"}],"sched":[{"週次":"1","星期":"二","節次":"1","姓名":"何君慧","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"2","姓名":"何君慧","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"4","姓名":"何君慧","內容":"生物-動物體的構造與功能","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"二","節次":"5","姓名":"何君慧","內容":"生物-動物體的構造與功能","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"二","節次":"8","姓名":"何君慧","內容":"反思會議","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"三","節次":"2","姓名":"何君慧","內容":"自然科學","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"3","姓名":"何君慧","內容":"自然科學","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"5","姓名":"何君慧","內容":"生物-細胞與遺傳","班級/地點":"高二","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"8","姓名":"何君慧","內容":"生物","班級/地點":"高一","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"1","姓名":"何君慧","內容":"自然探究與實作","班級/地點":"高二","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"2","姓名":"何君慧","內容":"自然探究與實作","班級/地點":"高二","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"4","姓名":"何君慧","內容":"自然科學","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"5","姓名":"何君慧","內容":"生物-細胞與遺傳","班級/地點":"高二","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"8","姓名":"何君慧","內容":"生物","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"1","姓名":"何君慧","內容":"行政實習","班級/地點":"總務處","類型":"行政實習"},{"週次":"1","星期":"五","節次":"2","姓名":"何君慧","內容":"行政實習","班級/地點":"總務處","類型":"行政實習"},{"週次":"1","星期":"五","節次":"7","姓名":"何君慧","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"1","星期":"五","節次":"8","姓名":"何君慧","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"2","星期":"一","節次":"5","姓名":"何君慧","內容":"生物","班級/地點":"高一","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"1","姓名":"何君慧","內容":"週會","班級/地點":"國三","類型":"導師見習"},{"週次":"2","星期":"二","節次":"2","姓名":"何君慧","內容":"班會","班級/地點":"國三","類型":"導師見習"},{"週次":"2","星期":"二","節次":"4","姓名":"何君慧","內容":"生物-動物體的構造與功能","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"5","姓名":"何君慧","內容":"生物-動物體的構造與功能","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"8","姓名":"何君慧","內容":"行政實習","班級/地點":"教務處","類型":"行政實習"},{"週次":"2","星期":"三","節次":"5","姓名":"何君慧","內容":"生物-細胞與遺傳","班級/地點":"高二","類型":"觀課/試教"},{"週次":"2","星期":"三","節次":"8","姓名":"何君慧","內容":"生物","班級/地點":"高一","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"5","姓名":"何君慧","內容":"生物-細胞與遺傳","班級/地點":"高二","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"8","姓名":"何君慧","內容":"生物","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"五","節次":"1","姓名":"何君慧","內容":"生物","班級/地點":"高一","類型":"觀課/試教"},{"週次":"2","星期":"五","節次":"2","姓名":"何君慧","內容":"行政實習","班級/地點":"學務處","類型":"行政實習"},{"週次":"2","星期":"五","節次":"8","姓名":"何君慧","內容":"座談會/結業式","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"1","姓名":"詹沁洋","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"2","姓名":"詹沁洋","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"7","姓名":"詹沁洋","內容":"國文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"二","節次":"8","姓名":"詹沁洋","內容":"反思會議","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"三","節次":"1","姓名":"詹沁洋","內容":"國文","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"6","姓名":"詹沁洋","內容":"行政實習","班級/地點":"教務處","類型":"行政實習"},{"週次":"1","星期":"三","節次":"7","姓名":"詹沁洋","內容":"行政實習","班級/地點":"","類型":"行政實習"},{"週次":"1","星期":"三","節次":"8","姓名":"詹沁洋","內容":"國文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"1","姓名":"詹沁洋","內容":"國文","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"6","姓名":"詹沁洋","內容":"語文專題","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"7","姓名":"詹沁洋","內容":"國文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"1","姓名":"詹沁洋","內容":"國文","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"5","姓名":"詹沁洋","內容":"國文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"7","姓名":"詹沁洋","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"1","星期":"五","節次":"8","姓名":"詹沁洋","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"2","星期":"一","節次":"1","姓名":"詹沁洋","內容":"國文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"一","節次":"5","姓名":"詹沁洋","內容":"國文","班級/地點":"國一","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"1","姓名":"詹沁洋","內容":"週會","班級/地點":"國一","類型":"導師見習"},{"週次":"2","星期":"二","節次":"2","姓名":"詹沁洋","內容":"班會","班級/地點":"國一","類型":"導師見習"},{"週次":"2","星期":"二","節次":"7","姓名":"詹沁洋","內容":"國文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"8","姓名":"詹沁洋","內容":"行政實習","班級/地點":"總務處","類型":"行政實習"},{"週次":"2","星期":"三","節次":"1","姓名":"詹沁洋","內容":"國文","班級/地點":"國一","類型":"觀課/試教"},{"週次":"2","星期":"三","節次":"8","姓名":"詹沁洋","內容":"國文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"1","姓名":"詹沁洋","內容":"國文","班級/地點":"國一","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"6","姓名":"詹沁洋","內容":"語文專題","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"7","姓名":"詹沁洋","內容":"國文","班級/地點":"國三","類型":"觀課/試教"},{"週次":"2","星期":"五","節次":"1","姓名":"詹沁洋","內容":"行政實習","班級/地點":"學務處","類型":"行政實習"},{"週次":"2","星期":"五","節次":"2","姓名":"詹沁洋","內容":"行政實習","班級/地點":"學務處","類型":"行政實習"},{"週次":"2","星期":"五","節次":"5","姓名":"詹沁洋","內容":"國文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"五","節次":"8","姓名":"詹沁洋","內容":"座談會/結業式","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"1","姓名":"范名妤","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"2","姓名":"范名妤","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"6","姓名":"范名妤","內容":"Pre FCE","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"二","節次":"8","姓名":"范名妤","內容":"反思會議","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"三","節次":"1","姓名":"范名妤","內容":"Pre FCE","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"2","姓名":"范名妤","內容":"英文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"3","姓名":"范名妤","內容":"英文","班級/地點":"高二","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"6","姓名":"范名妤","內容":"補強英文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"4","姓名":"范名妤","內容":"英文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"6","姓名":"范名妤","內容":"英文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"7","姓名":"范名妤","內容":"Pre FCE","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"1","姓名":"范名妤","內容":"行政實習","班級/地點":"學務處","類型":"行政實習"},{"週次":"1","星期":"五","節次":"2","姓名":"范名妤","內容":"行政實習","班級/地點":"學務處","類型":"行政實習"},{"週次":"1","星期":"五","節次":"5","姓名":"范名妤","內容":"IELTS","班級/地點":"高二","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"6","姓名":"范名妤","內容":"Pre FCE","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"7","姓名":"范名妤","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"1","星期":"五","節次":"8","姓名":"范名妤","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"2","星期":"一","節次":"2","姓名":"范名妤","內容":"英文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"2","星期":"一","節次":"4","姓名":"范名妤","內容":"英文聽講","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"1","姓名":"范名妤","內容":"週會","班級/地點":"國二","類型":"導師見習"},{"週次":"2","星期":"二","節次":"2","姓名":"范名妤","內容":"班會","班級/地點":"國二","類型":"導師見習"},{"週次":"2","星期":"二","節次":"3","姓名":"范名妤","內容":"英文","班級/地點":"高二","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"6","姓名":"范名妤","內容":"Pre FCE","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"8","姓名":"范名妤","內容":"行政實習","班級/地點":"總務處","類型":"行政實習"},{"週次":"2","星期":"三","節次":"1","姓名":"范名妤","內容":"Pre FCE","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"三","節次":"3","姓名":"范名妤","內容":"英文","班級/地點":"高二","類型":"觀課/試教"},{"週次":"2","星期":"三","節次":"8","姓名":"范名妤","內容":"行政實習","班級/地點":"總務處","類型":"行政實習"},{"週次":"2","星期":"四","節次":"4","姓名":"范名妤","內容":"英文","班級/地點":"高三","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"6","姓名":"范名妤","內容":"英文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"2","星期":"五","節次":"1","姓名":"范名妤","內容":"行政實習","班級/地點":"教務處","類型":"行政實習"},{"週次":"2","星期":"五","節次":"2","姓名":"范名妤","內容":"行政實習","班級/地點":"教務處","類型":"行政實習"},{"週次":"2","星期":"五","節次":"5","姓名":"范名妤","內容":"IELTS","班級/地點":"高二","類型":"觀課/試教"},{"週次":"2","星期":"五","節次":"8","姓名":"范名妤","內容":"座談會/結業式","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"1","姓名":"張簡煒庭","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"2","姓名":"張簡煒庭","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"5","姓名":"張簡煒庭","內容":"數學","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"二","節次":"6","姓名":"張簡煒庭","內容":"數學","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"二","節次":"8","姓名":"張簡煒庭","內容":"反思會議","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"三","節次":"1","姓名":"張簡煒庭","內容":"數學","班級/地點":"國三","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"4","姓名":"張簡煒庭","內容":"數學","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"6","姓名":"張簡煒庭","內容":"數學","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"1","姓名":"張簡煒庭","內容":"數學","班級/地點":"國三","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"2","姓名":"張簡煒庭","內容":"數學","班級/地點":"國三","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"6","姓名":"張簡煒庭","內容":"數學","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"7","姓名":"張簡煒庭","內容":"數學","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"1","姓名":"張簡煒庭","內容":"行政實習","班級/地點":"學務處","類型":"行政實習"},{"週次":"1","星期":"五","節次":"2","姓名":"張簡煒庭","內容":"行政實習","班級/地點":"總務處","類型":"行政實習"},{"週次":"1","星期":"五","節次":"5","姓名":"張簡煒庭","內容":"數學","班級/地點":"國一","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"7","姓名":"張簡煒庭","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"1","星期":"五","節次":"8","姓名":"張簡煒庭","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"2","星期":"一","節次":"1","姓名":"張簡煒庭","內容":"數學","班級/地點":"國一","類型":"觀課/試教"},{"週次":"2","星期":"一","節次":"4","姓名":"張簡煒庭","內容":"數學","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"1","姓名":"張簡煒庭","內容":"週會","班級/地點":"國一","類型":"導師見習"},{"週次":"2","星期":"二","節次":"2","姓名":"張簡煒庭","內容":"班會","班級/地點":"國一","類型":"導師見習"},{"週次":"2","星期":"二","節次":"5","姓名":"張簡煒庭","內容":"數學","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"6","姓名":"張簡煒庭","內容":"數學","班級/地點":"國一","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"8","姓名":"張簡煒庭","內容":"行政實習","班級/地點":"教務處","類型":"行政實習"},{"週次":"2","星期":"三","節次":"1","姓名":"張簡煒庭","內容":"數學","班級/地點":"國三","類型":"觀課/試教"},{"週次":"2","星期":"三","節次":"6","姓名":"張簡煒庭","內容":"數學","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"1","姓名":"張簡煒庭","內容":"數學","班級/地點":"國三","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"2","姓名":"張簡煒庭","內容":"數學","班級/地點":"國三","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"6","姓名":"張簡煒庭","內容":"數學","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"五","節次":"1","姓名":"張簡煒庭","內容":"行政實習","班級/地點":"圖書館","類型":"行政實習"},{"週次":"2","星期":"五","節次":"2","姓名":"張簡煒庭","內容":"行政實習","班級/地點":"圖書館","類型":"行政實習"},{"週次":"2","星期":"五","節次":"8","姓名":"張簡煒庭","內容":"座談會/結業式","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"1","姓名":"洪懌安","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"2","姓名":"洪懌安","內容":"歡迎會","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"二","節次":"7","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"二","節次":"8","姓名":"洪懌安","內容":"反思會議","班級/地點":"會議室","類型":"全體活動"},{"週次":"1","星期":"三","節次":"4","姓名":"洪懌安","內容":"國文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"1","星期":"三","節次":"6","姓名":"洪懌安","內容":"行政實習","班級/地點":"教務處","類型":"行政實習"},{"週次":"1","星期":"三","節次":"7","姓名":"洪懌安","內容":"行政實習","班級/地點":"教務處","類型":"行政實習"},{"週次":"1","星期":"三","節次":"8","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"1","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"7","姓名":"洪懌安","內容":"國文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"1","星期":"四","節次":"8","姓名":"洪懌安","內容":"國文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"5","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"1","星期":"五","節次":"7","姓名":"洪懌安","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"1","星期":"五","節次":"8","姓名":"洪懌安","內容":"共同討論","班級/地點":"圖書館","類型":"全體活動"},{"週次":"2","星期":"一","節次":"3","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"一","節次":"4","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"1","姓名":"洪懌安","內容":"週會","班級/地點":"國二","類型":"導師見習"},{"週次":"2","星期":"二","節次":"2","姓名":"洪懌安","內容":"班會","班級/地點":"國二","類型":"導師見習"},{"週次":"2","星期":"二","節次":"3","姓名":"洪懌安","內容":"國文","班級/地點":"國一","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"7","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"二","節次":"8","姓名":"洪懌安","內容":"行政實習","班級/地點":"總務處","類型":"行政實習"},{"週次":"2","星期":"三","節次":"4","姓名":"洪懌安","內容":"國文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"2","星期":"三","節次":"8","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"1","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"7","姓名":"洪懌安","內容":"國文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"2","星期":"四","節次":"8","姓名":"洪懌安","內容":"國文","班級/地點":"高一","類型":"觀課/試教"},{"週次":"2","星期":"五","節次":"1","姓名":"洪懌安","內容":"行政實習","班級/地點":"學務處","類型":"行政實習"},{"週次":"2","星期":"五","節次":"2","姓名":"洪懌安","內容":"行政實習","班級/地點":"學務處","類型":"行政實習"},{"週次":"2","星期":"五","節次":"5","姓名":"洪懌安","內容":"國文","班級/地點":"國二","類型":"觀課/試教"},{"週次":"2","星期":"五","節次":"8","姓名":"洪懌安","內容":"座談會/結業式","班級/地點":"會議室","類型":"全體活動"}]};
+    var DAYS=['一','二','三','四','五'];
+    var PER=[['1','8:00','8:45'],['2','8:55','9:40'],['3','9:50','10:35'],['4','10:45','11:30'],['5','11:35','12:20'],
+             ['bar','12:20–13:30','午餐・午休'],['6','13:30','14:15'],['7','14:20','15:05'],['bar','15:05–15:20','掃除'],['8','15:20','16:05']];
+    var TYPE={'觀課/試教':'t-class','行政實習':'t-admin','導師見習':'t-home','全體活動':'t-all'};
+    var data=SNAP, st={who:'all',week:1,day:1};
+    function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+    function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+    function dateOf(w,di){return new Date(2026,10,16+(w-1)*7+di)}
+    function md(dt){return (dt.getMonth()+1)+'/'+dt.getDate()}
+    var now=new Date(), tKey=now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(), todayW=0, todayD=-1;
+    for(var w=1;w<=2;w++)for(var i=0;i<5;i++){var dt=dateOf(w,i);if(dt.getFullYear()+'-'+dt.getMonth()+'-'+dt.getDate()===tKey){todayW=w;todayD=i}}
+    if(todayW){st.week=todayW;st.day=todayD}
+    var saved=ls('kl-sched-who'); if(saved) st.who=saved;
+
+    function students(){return data.students.filter(function(x){return x['姓名']})}
+    function shortOf(n){var s=students().filter(function(x){return x['姓名']===n})[0];return s&&s['簡稱']?s['簡稱']:n}
+    function entries(w,day,p){return data.sched.filter(function(r){return r['週次']==w&&r['星期']===day&&r['節次']==p})}
+    function tclass(t){return TYPE[t]||'t-other'}
+
+    function renderClasses(){
+      document.getElementById('clsGrid').innerHTML=students().map(function(s){
+        var cls=data.classes.filter(function(c){return c['姓名']===s['姓名']});
+        return '<div class="cls-card"><div class="nm">'+esc(s['簡稱']||s['姓名'])+'</div><div class="sub">'+esc(s['科目'])+(s['任課老師']?'・任課 '+esc(s['任課老師']):'')+'</div><ul>'+
+          (cls.length?cls.map(function(c){return '<li><span class="role'+(c['身分']==='導師班'?'':' r2')+'">'+esc(c['身分']||'班級')+'</span><b>'+esc(c['班級'])+'</b>'+(c['人數']?' '+esc(c['人數'])+' 人':'')+(c['老師']?'・'+esc(c['老師']):'')+'</li>'}).join(''):'<li class="muted">尚未填寫</li>')+'</ul></div>';
+      }).join('');
+    }
+    function cellHTML(w,day,p){
+      var es=entries(w,day,p);
+      if(!es.length) return '';
+      if(st.who!=='all'){
+        return es.filter(function(r){return r['姓名']===st.who}).map(function(r){
+          return '<span class="ev '+tclass(r['類型'])+'"><b>'+esc(r['內容'])+'</b>'+(r['班級/地點']?'<span class="loc">'+esc(r['班級/地點'])+'</span>':'')+'</span>'}).join('');
+      }
+      var names=students().map(function(s){return s['姓名']});
+      var f=es[0], same=names.length>1&&names.every(function(n){return es.some(function(r){return r['姓名']===n&&r['內容']===f['內容']&&r['班級/地點']===f['班級/地點']})});
+      if(same) return '<span class="ev '+tclass(f['類型'])+'"><b>全體・'+esc(f['內容'])+'</b>'+(f['班級/地點']?'<span class="loc">'+esc(f['班級/地點'])+'</span>':'')+'</span>';
+      var order=function(r){var i=names.indexOf(r['姓名']);return i<0?99:i};
+      return es.slice().sort(function(a,b){return order(a)-order(b)}).map(function(r){
+        return '<span class="ev mini '+tclass(r['類型'])+'"><b>'+esc(shortOf(r['姓名']))+'</b>'+esc(r['內容'])+(r['班級/地點']?'・'+esc(r['班級/地點']):'')+'</span>'}).join('');
+    }
+    function renderButtons(){
+      var who=document.getElementById('scWho');
+      who.innerHTML=[['all','全部']].concat(students().map(function(s){return [s['姓名'],s['簡稱']||s['姓名']]})).map(function(o){
+        return '<button type="button" data-who="'+esc(o[0])+'" aria-pressed="'+(st.who===o[0])+'">'+esc(o[1])+'</button>'}).join('');
+      document.getElementById('scWeek').innerHTML=[1,2].map(function(w){
+        return '<button type="button" data-week="'+w+'" aria-pressed="'+(st.week===w)+'">第'+(w===1?'一':'二')+'週<small>'+md(dateOf(w,0))+'–'+dateOf(w,4).getDate()+'</small></button>'}).join('');
+      document.getElementById('scDay').innerHTML=DAYS.map(function(d,i){
+        return '<button type="button" data-day="'+i+'" aria-pressed="'+(st.day===i)+'">'+d+'<small>'+md(dateOf(st.week,i))+'</small></button>'}).join('');
+    }
+    function renderTable(){
+      var w=st.week, h='<table class="sc"><thead><tr><th class="p"></th>'+DAYS.map(function(d,i){
+        var t=(w===todayW&&i===todayD)?' class="today"':'';
+        return '<th'+t+'><b>'+md(dateOf(w,i))+'</b>星期'+d+(w===1&&i===0?'・抵達日':'')+'</th>'}).join('')+'</tr></thead><tbody>';
+      PER.forEach(function(p){
+        if(p[0]==='bar'){h+='<tr class="bar"><td colspan="6">'+p[1]+'　'+p[2]+'</td></tr>';return}
+        h+='<tr><th class="p" scope="row"><b>'+p[0]+'</b>'+p[1]+'<br>'+p[2]+'</th>'+DAYS.map(function(d,i){
+          return '<td'+((w===todayW&&i===todayD)?' class="today"':'')+'>'+cellHTML(w,d,p[0])+'</td>'}).join('')+'</tr>';
+      });
+      document.getElementById('scDesk').innerHTML=h+'</tbody></table>';
+    }
+    function renderList(){
+      var d=DAYS[st.day], h='';
+      PER.forEach(function(p){
+        if(p[0]==='bar'){h+='<li class="bar">'+p[1]+'　'+p[2]+'</li>';return}
+        var c=cellHTML(st.week,d,p[0]);
+        h+='<li><div class="tm"><b>'+p[0]+'</b>'+p[1]+'–'+p[2]+'</div><div>'+(c||'<span class="none">'+(st.week===1&&st.day===0?'抵達日':'—')+'</span>')+'</div></li>';
+      });
+      document.getElementById('scList').innerHTML=h;
+    }
+    function render(){
+      if(st.who!=='all'&&!students().some(function(s){return s['姓名']===st.who}))st.who='all';
+      renderButtons();renderTable();renderList();
+    }
+    document.getElementById('sched').addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      if(b.dataset.who){st.who=b.dataset.who;ls('kl-sched-who',st.who)}
+      else if(b.dataset.week){st.week=+b.dataset.week;if(st.week===1&&st.day===0&&!todayW)st.day=1}
+      else if(b.dataset.day){st.day=+b.dataset.day}
+      else return;
+      render();
+    });
+    document.getElementById('days').addEventListener('click',function(e){
+      var a=e.target.closest('.day-link'); if(!a) return;
+      st.week=+a.dataset.w; st.day=+a.dataset.d; render();
+    });
+    function setSrc(t){document.getElementById('scSrc').innerHTML=t}
+
+    // ---- load: last good copy first, then live sheet
+    try{var c=JSON.parse(ls('kl-sched-cache')||'null');if(c&&c.data&&c.data.sched&&c.data.sched.length){data=c.data;setSrc('目前顯示上次載入的資料（'+esc(c.at)+'），正在讀取最新版本…')}}catch(e){}
+    if(data===SNAP) setSrc('目前顯示備份資料（'+SNAP_DATE+' 版），正在讀取最新版本…');
+    renderClasses();render();
+
+    function parseCSV(t){
+      var rows=[],row=[],f='',q=false;
+      for(var i=0;i<t.length;i++){var ch=t[i];
+        if(q){if(ch==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=ch}
+        else if(ch==='"')q=true; else if(ch===','){row.push(f);f=''} else if(ch==='\n'){row.push(f);rows.push(row);row=[];f=''} else if(ch!=='\r')f+=ch}
+      if(f!==''||row.length){row.push(f);rows.push(row)}
+      var hd=(rows.shift()||[]).map(function(x){return x.trim()});
+      return {head:hd,rows:rows.filter(function(r){return r.some(function(x){return x.trim()})}).map(function(r){var o={};hd.forEach(function(h,i){o[h]=(r[i]||'').trim()});return o})};
+    }
+    function get(name,need){
+      var url='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:csv&headers=1&sheet='+encodeURIComponent(name)+'&_='+Date.now();
+      return fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){
+        var p=parseCSV(t); if(!need.every(function(h){return p.head.indexOf(h)>=0}))throw 0; return p.rows});
+    }
+    var timer=new Promise(function(_,rej){setTimeout(function(){rej(0)},10000)});
+    Promise.race([Promise.all([get('見習生',['姓名','簡稱']),get('班級',['姓名','班級','人數','身分','老師']),get('課表',['週次','星期','節次','姓名','內容','班級/地點','類型'])]),timer])
+    .then(function(r){
+      if(!r[0].length||!r[2].length) throw 0;
+      data={students:r[0],classes:r[1],sched:r[2]};
+      var at=(now.getMonth()+1)+'/'+now.getDate()+' '+('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
+      ls('kl-sched-cache',JSON.stringify({at:at,data:data}));
+      setSrc('資料來源：Google 試算表，已讀取最新版本。');
+      renderClasses();render();
+    }).catch(function(){
+      var t=document.getElementById('scSrc').innerHTML.replace('，正在讀取最新版本…','');
+      setSrc(t+'。目前讀不到 Google 試算表，連上網路後重新整理就會更新。');
+    });
+  })();
 
   // ---------- rail highlight ----------
   var links=[].slice.call(document.querySelectorAll('#rail a'));
