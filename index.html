@@ -114,6 +114,15 @@ figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .itin .stop{padding-left:16px;position:relative}
 .itin .stop::before{content:"";position:absolute;left:-1px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--accent);transform:translateX(-50%)}
 .itin .stop b{font-size:16px}
+.itin .stop.key b{color:var(--accent-ink)}
+.itin .stop.key::before{box-shadow:0 0 0 4px var(--accent-soft)}
+.adm-tips{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:8px}
+.adm-tips li{padding-bottom:8px;border-bottom:1px dashed var(--line)}
+.adm-tips li b{display:block}
+.adm-tips li.key b{color:var(--accent-ink)}
+.tasks.mdac>li::before{content:counter(t)}
+.tasks.mdac ul{margin:6px 0 4px;padding-left:1.2em;font-size:15px}
+.adm-tips li span{font-size:15px;color:var(--muted)}
 .itin .meal{font-size:12px;border:1px solid var(--accent);color:var(--accent-ink);border-radius:4px;padding:0 5px;margin-right:6px;vertical-align:2px}
 .itin .how{display:block;font-size:13px;color:var(--muted)}
 .itin .stop p{font-size:15px;margin:2px 0 0}
@@ -180,7 +189,9 @@ figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 
 /* ch.11 schedule */
 .tbl-wrap{overflow-x:auto;margin:0 0 12px}
-.fee{border-collapse:collapse;width:100%;min-width:420px;font-variant-numeric:tabular-nums;font-size:15px}
+.fee{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:15px}
+.fee td:first-child,.fee .num{white-space:nowrap}
+@media (max-width:480px){.fee{font-size:14px}.fee th,.fee td{padding:8px 5px}}
 .fee th,.fee td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
 .fee th{font-size:13px;color:var(--muted);font-weight:500}
 .fee td.num,.fee th.num{text-align:right}
@@ -278,6 +289,7 @@ html{scroll-behavior:smooth}
     <li><a href="#team"><b>09</b>任務編組</a></li>
     <li><a href="#embassy"><b>10</b>駐馬辦事處</a></li>
     <li><a href="#sched"><b>11</b>課表</a></li>
+    <li><a href="#travel"><b>12</b>交通住宿</a></li>
   </ol>
 </nav>
 
@@ -460,7 +472,7 @@ html{scroll-behavior:smooth}
       <h3>入境文件</h3>
       <ul>
         <li>護照（效期 6 個月以上）</li>
-        <li>馬來西亞數位入境卡 <b>MDAC</b>（入境前 3 天內完成）</li>
+        <li>馬來西亞數位入境卡 <b>MDAC</b>（入境前 3 天內完成，<a href="#mdac">填寫步驟見下方</a>）</li>
         <li>回程機票及住宿證明</li>
         <li>建議備妥財力證明（視需要查驗）</li>
       </ul>
@@ -476,6 +488,38 @@ html{scroll-behavior:smooth}
       </ul>
     </div>
   </div>
+
+  <h3 id="mdac">MDAC 填寫步驟</h3>
+  <dl class="kv">
+    <dt>什麼時候填</dt><dd>抵達前 3 天（72 小時）內填寫並送出，太早送出會被系統拒絕。官網表單註明「含送出當天在內 3 天內」，所以我們 11/16 抵達，<b>11/14 以後送出最保險，建議 11/15 填</b>。</dd>
+    <dt>在哪裡填</dt><dd><a href="https://imigresen-online.imi.gov.my/mdac/main" target="_blank" rel="noopener">MDAC 官方網站 ↗</a></dd>
+  </dl>
+  <ol class="tasks mdac">
+    <li><div><b>進入官網，按「REGISTER」</b>非馬來西亞國籍的人都要填。</div></li>
+    <li><div><b>填個人資料（Personal Information）</b>
+      <ul>
+        <li>姓名：和護照相同的英文姓名</li>
+        <li>護照號碼、國籍、性別</li>
+        <li>出生日期、護照效期：格式是「日/月/西元年」</li>
+        <li>電子郵件：要填兩次確認</li>
+        <li>電話國碼選 886，再填手機號碼</li>
+      </ul></div></li>
+    <li><div><b>填旅遊資料（Traveling Information）</b>
+      <ul>
+        <li>抵達日期 16/11/2026，離開日期 28/11/2026</li>
+        <li>入境方式選 Air（搭飛機），入馬前離境地點選 Taiwan（台北桃園 TPE），航班號碼填 <b>JX725</b></li>
+        <li>住宿類型、在馬來西亞的住宿地址、州屬、城市、郵遞區號。地址只能填英文和數字</li>
+      </ul>
+      填好按「SUBMIT」送出。</div></li>
+    <li><div><b>收信，下載入境卡</b>送出後會收到 MDAC 寄來的信，信件最下方有一組 PIN 碼。回官網點上方「CHECK REGISTRATION」，填護照號碼、國籍和 PIN 碼，勾選「我不是機器人」後送出，再從頁面下方表格最右側下載 PDF。</div></li>
+  </ol>
+  <h4>入境時</h4>
+  <ul>
+    <li>入境卡不一定要印出來，存在手機裡備用即可。</li>
+    <li>第一次入境馬來西亞要走一般人工櫃台，查驗護照並採集指紋。之後再入境，臺灣護照可以改走自動通關（Autogate）。</li>
+    <li>就算能走自動通關，每次入境前還是要先填 MDAC，兩者缺一不可。</li>
+  </ul>
+  <p class="muted">參考：<a href="https://www.boca.gov.tw/sp-foof-countrycp-01-23-a7372-1.html" target="_blank" rel="noopener">外交部領事事務局・馬來西亞 ↗</a></p>
 </section>
 
 <section id="culture">
@@ -579,37 +623,8 @@ html{scroll-behavior:smooth}
     <dt>座談會/結業式</dt><dd>11/27（五）15:20・會議室（暫定）</dd>
   </dl>
 
-  <h4>住宿費與餐費</h4>
-  <div class="tbl-wrap"><table class="fee">
-    <thead><tr><th>項目</th><th class="num">單價</th><th>天數</th><th class="num">每人小計</th></tr></thead>
-    <tbody>
-      <tr><td>早餐</td><td class="num">RM7／餐</td><td>9 天（11/17–20、11/23–27）</td><td class="num">RM63</td></tr>
-      <tr><td>午餐</td><td class="num">RM12／餐</td><td>9 天（11/17–20、11/23–27）</td><td class="num">RM108</td></tr>
-      <tr><td>住宿</td><td class="num">RM100／晚</td><td>13 晚（11/16–28）</td><td class="num">RM1,300</td></tr>
-    </tbody>
-    <tfoot><tr><td colspan="3">每人合計</td><td class="num">RM1,471</td></tr></tfoot>
-  </table></div>
-  <p class="muted">晚餐可以另外訂，有需要再告知校方。</p>
-
   <h4>行政見習</h4>
   <p>國文專長的見習生協助教務處辦理中學部華語好書分享比賽。五位見習生輪流到教務處、學務處、總務處和圖書館見習，各自的時段見下方課表。</p>
-
-  <h4>住宿</h4>
-  <div class="room">
-    <a class="maplink" href="https://docs.google.com/spreadsheets/d/1DDqs04ZUQQNHTMw00AALJSgwWLBrFoJT-eKGsXzoKvk/edit" target="_blank" rel="noopener">查看住宿分配（限團隊成員）↗</a>
-    <small>需要登入 Google，只有團隊成員的帳號打得開</small>
-  </div>
-  <ul>
-    <li>宿舍有洗衣機和烘衣機，可以洗衣服。</li>
-    <li>宿舍請自行打掃，教職員宿舍晚間請保持安靜。</li>
-  </ul>
-
-  <h4>行前提醒</h4>
-  <ul>
-    <li>早、午餐的餐具和水瓶請自備。</li>
-    <li>近日馬來西亞常有大雨，記得帶雨具。</li>
-    <li>馬來西亞電壓為 220V，插座形狀也和臺灣不同，須帶轉接插頭。</li>
-  </ul>
 
   <h3>班級資訊</h3>
   <div class="cls-grid" id="clsGrid"></div>
@@ -628,6 +643,40 @@ html{scroll-behavior:smooth}
   <p class="sc-note" id="scSrc"></p>
 </section>
 
+<section id="travel">
+  <div class="ch-head"><span class="ch-num">12</span><h2>交通、住宿與行前提醒</h2></div>
+
+  <h3>出發與回程</h3>
+  <div id="adminBox"></div>
+
+  <h3>住宿費與餐費</h3>
+  <div class="tbl-wrap"><table class="fee">
+    <thead><tr><th>項目</th><th class="num">單價</th><th>天數</th><th class="num">每人小計</th></tr></thead>
+    <tbody>
+      <tr><td>早餐</td><td class="num">RM7／餐</td><td>9 天（11/17–20、11/23–27）</td><td class="num">RM63</td></tr>
+      <tr><td>午餐</td><td class="num">RM12／餐</td><td>9 天（11/17–20、11/23–27）</td><td class="num">RM108</td></tr>
+      <tr><td>住宿</td><td class="num">RM100／晚</td><td>13 晚（11/16–28）</td><td class="num">RM1,300</td></tr>
+    </tbody>
+    <tfoot><tr><td colspan="3">每人合計</td><td class="num">RM1,471</td></tr></tfoot>
+  </table></div>
+  <p class="muted">晚餐可以另外訂，有需要再告知校方。</p>
+
+  <h3>住宿</h3>
+  <div class="room">
+    <a class="maplink" href="https://docs.google.com/spreadsheets/d/1DDqs04ZUQQNHTMw00AALJSgwWLBrFoJT-eKGsXzoKvk/edit" target="_blank" rel="noopener">查看住宿分配（限團隊成員）↗</a>
+    <small>需要登入 Google，只有團隊成員的帳號打得開</small>
+  </div>
+  <ul>
+    <li>宿舍有洗衣機和烘衣機，可以洗衣服。</li>
+    <li>宿舍請自行打掃，教職員宿舍晚間請保持安靜。</li>
+  </ul>
+
+  <h3>行前提醒</h3>
+  <div id="adminTips"></div>
+  <p class="sc-note">以上交通與提醒可能會調整，以群組最新公告為準。</p>
+</section>
+
+
 </main>
 <footer>國立高雄師範大學 115 學年度國外教育見習・版面設計 洪懌安</footer>
 
@@ -636,7 +685,7 @@ html{scroll-behavior:smooth}
   // ---------- schedule ----------
   var A=['學校行政、班級經營、教學見習與備課'];
   var days=[
-    {d:'11/16',w:'一',t:'travel',p:'桃園國際機場搭機出發，前往馬來西亞吉隆坡'},
+    {d:'11/16',w:'一',t:'travel',p:'桃園國際機場搭機出發，前往馬來西亞吉隆坡',x:1},
     {d:'11/17',w:'二',k:[1,1],items:['8:00 歡迎會（會議室）','兩校相見歡（簽約儀式）',A[0],'15:20 反思會議']},
     {d:'11/18',w:'三',k:[1,2],items:[A[0],'反思會議']},
     {d:'11/19',w:'四',k:[1,3],items:[A[0],'反思會議']},
@@ -648,7 +697,7 @@ html{scroll-behavior:smooth}
     {d:'11/25',w:'三',k:[2,2],items:[A[0],'試教與議課','反思會議']},
     {d:'11/26',w:'四',k:[2,3],items:[A[0],'試教與議課','反思會議']},
     {d:'11/27',w:'五',k:[2,4],items:[A[0],'試教與議課','反思會議','15:20 座談會/結業式（大合照）']},
-    {d:'11/28',w:'六',t:'travel',p:'搭機回臺灣（桃園國際機場）'}
+    {d:'11/28',w:'六',t:'travel',p:'搭機回臺灣（桃園國際機場）',x:1}
   ];
   var now=new Date(), today=(now.getMonth()+1)+'/'+now.getDate(), y=now.getFullYear();
   var box=document.getElementById('days');
@@ -657,6 +706,7 @@ html{scroll-behavior:smooth}
     el.className='day'+(x.t?' '+x.t:'')+(y===2026&&('11/'+x.d.split('/')[1])===today&&x.d.indexOf('11/')===0?' today':'');
     var h='<div><span class="d">'+x.d+'</span><span class="w">星期'+x.w+'</span></div>';
     if(x.p) h+='<p>'+x.p+'</p>'; else h+='<ol>'+x.items.map(function(i){return '<li>'+i+'</li>'}).join('')+'</ol>';
+    if(x.x) h+='<a class="day-link" href="#travel">看交通安排 →</a>';
     if(x.k) h+='<a class="day-link" href="#sched" data-w="'+x.k[0]+'" data-d="'+x.k[1]+'">看當天課表 →</a>';
     el.innerHTML=h; box.appendChild(el);
   });
@@ -877,6 +927,30 @@ html{scroll-behavior:smooth}
       return fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){
         var p=parseCSV(t); if(!need.every(function(h){return p.head.indexOf(h)>=0}))throw 0; return p.rows});
     }
+
+    // ---- admin / travel block (own tab, independent of the schedule load)
+    var ADMIN_SNAP=[{"類別":"11/16 去程","時間":"05:15","事項":"左營高鐵站集合","說明":"搭最早一班高鐵 05:50（車次 0300，自由座 9–12 車），07:26 抵達高鐵桃園站。","重點":"是"},{"類別":"11/16 去程","時間":"07:26","事項":"高鐵桃園站轉乘機場捷運","說明":"站內轉乘往台北方向的普通車，A18 到第二航廈 A13 約 17–20 分鐘，08:00 抵達機場。悠遊卡、一卡通或 icash 2.0 記得先加值。","重點":""},{"類別":"11/16 去程","時間":"08:30","事項":"桃園機場第二航廈集合","說明":"星宇航空櫃台前。到第二航廈「自助行李託運櫃檯」或專屬託運櫃檯辦理託運。","重點":"是"},{"類別":"11/16 去程","時間":"11:00","事項":"星宇航空 JX725　桃園 → 吉隆坡","說明":"桃園機場第二航廈出發，16:00 抵達吉隆坡國際機場第一航廈，飛行 5 小時。隨身帶護照正本、電子機票、伴手禮（茶葉）、文宣品、輔導費及感謝狀。","重點":""},{"類別":"11/16 去程","時間":"抵達後","事項":"Grab 叫車到學校","說明":"沁洋協助叫車。","重點":""},{"類別":"11/28 回程","時間":"中午","事項":"離開吉臺校，前往吉隆坡機場","說明":"","重點":""},{"類別":"11/28 回程","時間":"15:25","事項":"長榮航空 BR228　吉隆坡 → 桃園","說明":"吉隆坡國際機場第一航廈出發，20:05 抵達桃園機場第二航廈，飛行 4 小時 40 分。","重點":"是"},{"類別":"11/28 回程","時間":"20:05–21:15","事項":"下機、過海關、領行李","說明":"週末晚間是入境高峰，保守估計要 1 小時至 1 小時 10 分鐘。","重點":""},{"類別":"11/28 回程","時間":"21:20–21:45","事項":"機場捷運到高鐵桃園站","說明":"走到機場捷運 B2 車站，搭普通車約 17 分鐘，21:45 抵達高鐵桃園站大廳。","重點":""},{"類別":"11/28 回程","時間":"22:15","事項":"高鐵回左營","說明":"預計搭 22:15（車次 0333，23:55 抵達）。也可以改搭 22:05 或 22:35。","重點":""},{"類別":"行前提醒","時間":"","事項":"餐具與水瓶","說明":"早、午餐的餐具和水瓶請自備。","重點":""},{"類別":"行前提醒","時間":"","事項":"雨具","說明":"近日馬來西亞常有大雨，記得帶雨具。","重點":""},{"類別":"行前提醒","時間":"","事項":"轉接插頭","說明":"馬來西亞電壓 220V，插座形狀也和臺灣不同，須帶轉接插頭。","重點":""},{"類別":"行前提醒","時間":"","事項":"輔導老師的伴手禮與輔導費","說明":"伴手禮含文宣品；輔導費已提供 NKNU 信封及黏貼紙。另帶感謝狀、感謝卡（每位同學可以寫感謝卡給自己的輔導老師）。","重點":""},{"類別":"行前提醒","時間":"","事項":"識別證","說明":"各自佩帶，進吉臺校要用。","重點":""},{"類別":"行前提醒","時間":"","事項":"藥品與生活用品","說明":"藥品、感冒藥、防蚊液、雨傘、保溫瓶、拖鞋。","重點":""},{"類別":"行前提醒","時間":"","事項":"證件備份","說明":"護照影本、2 吋大頭照兩張，預防護照遺失。","重點":""},{"類別":"行前提醒","時間":"","事項":"團體上衣與網路","說明":"NKNU 深綠色團體上衣；自行購買網卡或開通漫遊。","重點":""},{"類別":"行前提醒","時間":"","事項":"流感疫苗","說明":"記得施打。","重點":""},{"類別":"行前提醒","時間":"","事項":"填寫 MDAC","說明":"馬來西亞數位入境卡，11/14 以後送出最保險，建議 11/15 填。填寫步驟見第 05 章「MDAC 填寫步驟」。","重點":"是"},{"類別":"行前提醒","時間":"","事項":"提前搭高鐵的同學","說明":"沁洋、名妤、煒庭請留存高鐵票根（核銷用），並注意 11/16 早上 8:30 在桃園機場集合。","重點":""}];
+    function renderAdmin(rows){
+      var groups=[],by={};
+      rows.forEach(function(r){var c=r['類別']||'其他';if(!by[c]){by[c]=[];groups.push(c)}by[c].push(r)});
+      var box='',tips='';
+      groups.forEach(function(g){
+        var rs=by[g];
+        if(rs.some(function(r){return r['時間']})){
+          box+='<h4>'+esc(g)+'</h4><ol class="itin">'+rs.map(function(r){var k=r['重點']==='是'?' key':'';
+            return '<li><time>'+esc(r['時間'])+'</time><div class="stop'+k+'"><b>'+esc(r['事項'])+'</b>'+(r['說明']?'<p>'+esc(r['說明'])+'</p>':'')+'</div></li>'}).join('')+'</ol>';
+        } else {
+          tips+=(g==='行前提醒'?'':'<h4>'+esc(g)+'</h4>')+'<ul class="adm-tips">'+rs.map(function(r){return '<li'+(r['重點']==='是'?' class="key"':'')+'><b>'+esc(r['事項'])+'</b>'+(r['說明']?'<span>'+esc(r['說明'])+'</span>':'')+'</li>'}).join('')+'</ul>';
+        }
+      });
+      document.getElementById('adminBox').innerHTML=box;
+      document.getElementById('adminTips').innerHTML=tips;
+    }
+    var adminCache=null; try{adminCache=JSON.parse(ls('kl-admin-cache')||'null')}catch(e){}
+    renderAdmin(adminCache&&adminCache.length?adminCache:ADMIN_SNAP);
+    get('行政事項',['類別','時間','事項','說明']).then(function(rows){
+      if(!rows.length) throw 0; ls('kl-admin-cache',JSON.stringify(rows)); renderAdmin(rows);
+    }).catch(function(){});
     var timer=new Promise(function(_,rej){setTimeout(function(){rej(0)},10000)});
     Promise.race([Promise.all([get('見習生',['姓名','簡稱']),get('班級',['姓名','班級','人數','身分','老師']),get('課表',['週次','星期','節次','姓名','內容','班級/地點','類型'])]),timer])
     .then(function(r){
