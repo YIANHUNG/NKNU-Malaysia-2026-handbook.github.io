@@ -130,6 +130,15 @@ figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .maplink:hover{filter:brightness(1.08)}
 
 /* tasks */
+.tk-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 4px}
+.tk-note{margin:0 0 6px}
+#taskList>li{grid-template-columns:2.6em 1fr auto}
+.tk{display:flex;align-items:flex-start;gap:6px;cursor:pointer;font-size:13px;color:var(--muted);white-space:nowrap;padding-top:2px}
+.tk input{appearance:none;flex:none;width:20px;height:20px;border:1.5px solid var(--muted);border-radius:5px;margin:0;display:grid;place-content:center;cursor:pointer;background:var(--sheet)}
+.tk input:checked{background:var(--accent);border-color:var(--accent)}
+.tk input:checked::after{content:"";width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+#taskList>li.done>div{opacity:.55}
+#taskList>li.done>div>b{text-decoration:line-through}
 .tasks{counter-reset:t;list-style:none;padding:0;display:grid;gap:0}
 .tasks>li{border-bottom:1px solid var(--line);padding:14px 0;display:grid;grid-template-columns:2.6em 1fr;gap:10px}
 .tasks>li>*{min-width:0}
@@ -560,7 +569,13 @@ html{scroll-behavior:smooth}
 <section id="tasks">
   <div class="ch-head"><span class="ch-num">07</span><h2>見習任務</h2></div>
   <div class="dl-row"><a class="maplink" href="https://reurl.cc/bea51y" target="_blank" rel="noopener">見習表單檔案下載 ↗</a></div>
-  <ol class="tasks">
+  <div class="tk-bar">
+    <div class="meter" role="progressbar" aria-label="見習任務完成進度" aria-valuemin="0" aria-valuemax="100" id="tkMeter"><span></span></div>
+    <span class="ck-count" id="tkCount">0 / 13 已完成</span>
+    <button class="btn" id="tkReset" type="button">全部取消</button>
+  </div>
+  <p class="muted tk-note">完成一項就勾一項。勾選只存在自己的瀏覽器，每個人各自記錄，互不影響。</p>
+  <ol class="tasks" id="taskList">
     <li><div><b>參與計畫之整體心得感想（反思）<span class="who">每人一份</span></b><span class="form">不限格式</span>
       <ol>
         <li>八場反思會議，每位同學在會議中都要做紀錄（摘取會議重點），再把會議紀錄給每日負責彙整的同學做總彙整。每位同學輪流彙整紀錄並上傳雲端，之後由文書懌安彙整總檔。</li>
@@ -964,6 +979,38 @@ html{scroll-behavior:smooth}
       var t=document.getElementById('scSrc').innerHTML.replace('，正在讀取最新版本…','');
       setSrc(t+'。目前讀不到 Google 試算表，連上網路後重新整理就會更新。');
     });
+  })();
+
+
+  // ---------- 07 task progress (per viewer, browser storage) ----------
+  (function(){
+    var list=document.getElementById('taskList'); if(!list) return;
+    var KEY='kl-tasks-v1', done={};
+    try{done=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){done={}}
+    function save(){try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}}
+    var items=[].slice.call(list.children);
+    items.forEach(function(li,i){
+      var id='tk-'+(i+1), lab=document.createElement('label');
+      lab.className='tk'; lab.htmlFor=id;
+      lab.innerHTML='<input type="checkbox" id="'+id+'"><span>完成</span>';
+      var cb=lab.querySelector('input'); cb.checked=!!done[id];
+      var t=li.querySelector('b'); cb.setAttribute('aria-label','完成：'+(t?t.textContent:'第'+(i+1)+'項'));
+      cb.addEventListener('change',function(){if(cb.checked)done[id]=1;else delete done[id];save();update()});
+      li.appendChild(lab);
+    });
+    function update(){
+      var n=0; items.forEach(function(li,i){var on=!!done['tk-'+(i+1)];li.classList.toggle('done',on);if(on)n++});
+      document.getElementById('tkCount').textContent=n+' / '+items.length+' 已完成';
+      var pct=Math.round(n/items.length*100), m=document.getElementById('tkMeter');
+      m.firstElementChild.style.width=pct+'%'; m.setAttribute('aria-valuenow',pct);
+    }
+    var rs=document.getElementById('tkReset'), armed=false, tm;
+    rs.addEventListener('click',function(){
+      if(!armed){armed=true;rs.textContent='再按一次確認';tm=setTimeout(function(){armed=false;rs.textContent='全部取消'},3000);return}
+      clearTimeout(tm);armed=false;rs.textContent='全部取消';done={};save();
+      list.querySelectorAll('.tk input').forEach(function(c){c.checked=false});update();
+    });
+    update();
   })();
 
   // ---------- rail highlight ----------
