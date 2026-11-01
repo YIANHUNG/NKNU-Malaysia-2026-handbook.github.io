@@ -177,6 +177,17 @@ figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .ck input{appearance:none;flex:none;width:18px;height:18px;border:1.5px solid var(--muted);border-radius:4px;margin:2px 0 0;display:grid;place-content:center;cursor:pointer;background:var(--sheet)}
 .ck input:checked{background:var(--accent);border-color:var(--accent)}
 .ck input:checked::after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.ck-chips{flex-basis:100%;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.ck-chips::-webkit-scrollbar{display:none}
+.ck-chips button{flex:none;font:inherit;font-size:13px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);border-radius:999px;padding:3px 11px;cursor:pointer;white-space:nowrap}
+.ck-chips button b{font-family:var(--mono);font-weight:500;color:var(--muted);margin-left:5px;font-variant-numeric:tabular-nums}
+.ck-chips button.full{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+.ck-chips button.full b{color:var(--accent-ink)}
+.ck-grid>div{scroll-margin-top:150px}
+.ck-restore{margin-top:14px}
+.ck-restore button{font:inherit;font-size:13px;background:none;border:0;color:var(--accent-ink);text-decoration:underline;cursor:pointer;padding:0}
+.ck-toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);z-index:40;background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 10px 8px 18px;display:flex;gap:12px;align-items:center;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.2);max-width:calc(100% - 32px)}
+.ck-toast button{font:inherit;font-size:13px;font-weight:700;border:0;border-radius:999px;background:var(--accent);color:#fff;padding:3px 12px;cursor:pointer}
 .ck-del{margin-left:auto;background:none;border:0;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:0 4px}
 .ck-del:hover{color:var(--accent-ink)}
 .ck-add{display:flex;gap:6px;margin-top:6px}
@@ -656,8 +667,11 @@ html{scroll-behavior:smooth}
     <div class="meter" role="progressbar" aria-label="打包進度" aria-valuemin="0" aria-valuemax="100" id="meter"><span></span></div>
     <span class="ck-count" id="ckcount">0 / 0</span>
     <button class="btn" id="ckreset" type="button">全部取消</button>
+    <div class="ck-chips" id="ckchips" aria-label="跳到分類"></div>
   </div>
   <div class="ck-grid" id="ckgrid"></div>
+  <p class="ck-restore" id="ckrestore"></p>
+  <div class="ck-toast" id="cktoast" role="status" hidden></div>
 </section>
 
 <section id="team">
@@ -844,8 +858,8 @@ html{scroll-behavior:smooth}
   ];
   var KEY='nknu_kl_checklist_v2', state;
   function load(){
-    state={checked:{},custom:{}};
-    try{var raw=localStorage.getItem(KEY); if(raw){var p=JSON.parse(raw); if(p&&typeof p==='object'){state.checked=p.checked||{};state.custom=p.custom||{};}}}catch(e){}
+    state={checked:{},custom:{},removed:[]};
+    try{var raw=localStorage.getItem(KEY); if(raw){var p=JSON.parse(raw); if(p&&typeof p==='object'){state.checked=p.checked||{};state.custom=p.custom||{};state.removed=Array.isArray(p.removed)?p.removed:[];}}}catch(e){}
     DEFAULT_DATA.forEach(function(g){if(!Array.isArray(state.custom[g.cat]))state.custom[g.cat]=[]});
   }
   function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
@@ -853,9 +867,9 @@ html{scroll-behavior:smooth}
   function render(){
     grid.innerHTML='';
     DEFAULT_DATA.forEach(function(g,gi){
-      var col=document.createElement('div');
+      var col=document.createElement('div'); col.id='ck-col-'+gi;
       var h=document.createElement('h4'); h.innerHTML='<span></span> <small data-g="'+gi+'"></small>'; h.firstChild.textContent=g.cat; col.appendChild(h);
-      var all=g.items.map(function(i){return [i,false]}).concat(state.custom[g.cat].map(function(i){return [i,true]}));
+      var all=g.items.filter(function(i){return state.removed.indexOf(g.cat+'::'+i)<0}).map(function(i){return [i,false]}).concat(state.custom[g.cat].map(function(i){return [i,true]}));
       all.forEach(function(pair,ii){
         var item=pair[0], key=g.cat+'::'+item, id='ck-'+gi+'-'+ii;
         var lab=document.createElement('label'); lab.className='ck'; lab.htmlFor=id;
@@ -863,18 +877,18 @@ html{scroll-behavior:smooth}
         lab.querySelector('span').textContent=item;
         var cb=lab.querySelector('input'); cb.checked=!!state.checked[key];
         cb.addEventListener('change',function(){state.checked[key]=cb.checked;save();update()});
-        if(pair[1]){
-          var del=document.createElement('button'); del.type='button'; del.className='ck-del'; del.textContent='×'; del.setAttribute('aria-label','刪除 '+item);
-          del.addEventListener('click',function(e){e.preventDefault();state.custom[g.cat]=state.custom[g.cat].filter(function(x){return x!==item});delete state.checked[key];save();render()});
-          lab.appendChild(del);
-        }
+        var del=document.createElement('button'); del.type='button'; del.className='ck-del'; del.textContent='×'; del.setAttribute('aria-label','刪除 '+item);
+        del.addEventListener('click',function(e){e.preventDefault();removeItem(g.cat,item,pair[1])});
+        lab.appendChild(del);
         col.appendChild(lab);
       });
       var add=document.createElement('form'); add.className='ck-add';
       add.innerHTML='<input type="text" maxlength="30" id="ck-add-'+gi+'" placeholder="＋ 新增項目" aria-label="在'+g.cat+'新增項目"><button class="btn" type="submit">新增</button>';
       add.addEventListener('submit',function(e){
         e.preventDefault(); var inp=add.querySelector('input'), v=inp.value.trim(); if(!v) return;
-        if(g.items.indexOf(v)<0&&state.custom[g.cat].indexOf(v)<0){state.custom[g.cat].push(v);save();render();}
+        var rk=g.cat+'::'+v, ri=state.removed.indexOf(rk);
+        if(ri>=0){state.removed.splice(ri,1);save();render();}
+        else if(g.items.indexOf(v)<0&&state.custom[g.cat].indexOf(v)<0){state.custom[g.cat].push(v);save();render();}
         else inp.value='';
       });
       col.appendChild(add);
@@ -888,15 +902,42 @@ html{scroll-behavior:smooth}
     document.getElementById('ckcount').textContent=done+' / '+total+' 已確認';
     var pct=total?Math.round(done/total*100):0, m=document.getElementById('meter');
     m.firstElementChild.style.width=pct+'%'; m.setAttribute('aria-valuenow',pct);
+    var chips='';
     DEFAULT_DATA.forEach(function(g,gi){
       var cs=grid.querySelectorAll('input[data-g="'+gi+'"]'), n=0; cs.forEach(function(c){if(c.checked)n++});
       grid.querySelector('small[data-g="'+gi+'"]').textContent=n+'/'+cs.length;
+      chips+='<button type="button" data-gi="'+gi+'"'+(cs.length&&n===cs.length?' class="full"':'')+'>'+g.cat+'<b>'+n+'/'+cs.length+'</b></button>';
     });
+    document.getElementById('ckchips').innerHTML=chips;
+    var rr=document.getElementById('ckrestore');
+    rr.innerHTML=state.removed.length?'<button type="button" id="ckrestorebtn">還原刪掉的原有項目（'+state.removed.length+' 項）</button>':'';
   }
   var rs=document.getElementById('ckreset'), armed=false, tm;
   rs.addEventListener('click',function(){
     if(!armed){armed=true;rs.textContent='再按一次確認';tm=setTimeout(function(){armed=false;rs.textContent='全部取消'},3000);return}
     clearTimeout(tm);armed=false;rs.textContent='全部取消';state.checked={};save();render();
+  });
+  function removeItem(cat,item,isCustom){
+    var key=cat+'::'+item, wasChecked=!!state.checked[key], idx=-1;
+    if(isCustom){idx=state.custom[cat].indexOf(item);state.custom[cat].splice(idx,1)} else state.removed.push(key);
+    delete state.checked[key]; save(); render();
+    toast('已刪除「'+(item.length>12?item.slice(0,12)+'…':item)+'」',function(){
+      if(isCustom) state.custom[cat].splice(Math.max(0,idx),0,item); else state.removed=state.removed.filter(function(k){return k!==key});
+      if(wasChecked) state.checked[key]=true; save(); render();
+    });
+  }
+  var tt, tb=document.getElementById('cktoast');
+  function toast(msg,undo){
+    clearTimeout(tt); tb.innerHTML=''; var sp=document.createElement('span'); sp.textContent=msg; tb.appendChild(sp);
+    if(undo){var b=document.createElement('button');b.type='button';b.textContent='復原';b.addEventListener('click',function(){undo();tb.hidden=true});tb.appendChild(b)}
+    tb.hidden=false; tt=setTimeout(function(){tb.hidden=true},6000);
+  }
+  document.getElementById('ckchips').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var el=document.getElementById('ck-col-'+b.dataset.gi); if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  document.getElementById('ckrestore').addEventListener('click',function(e){
+    if(!e.target.closest('#ckrestorebtn')) return; var n=state.removed.length; state.removed=[]; save(); render(); toast('已還原 '+n+' 個原有項目');
   });
   // another tab (e.g. the standalone checklist) changed the list: redraw
   window.addEventListener('storage',function(e){if(e.key===KEY){load();render();}});
