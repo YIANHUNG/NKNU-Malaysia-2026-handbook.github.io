@@ -53,6 +53,9 @@ a{color:var(--accent-ink)}
 .dates{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:22px}
 .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--accent);color:var(--accent-ink);background:var(--sheet);border-radius:999px;padding:3px 14px;font-size:14px;font-variant-numeric:tabular-nums}
 .pill.solid{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pill.dl{text-decoration:none}
+.pill.dl:hover{background:var(--accent-soft)}
+.pill.dl small{font-family:var(--mono);font-size:11px;opacity:.75}
 
 /* chapter rail */
 .rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -328,6 +331,7 @@ html{scroll-behavior:smooth}
     <div class="dates">
       <span class="pill solid">2026/11/16 – 11/28</span>
       <span class="pill" id="countdown">13 天</span>
+      <a class="pill dl" href="handbook.pdf" download="馬來西亞見習活動手冊.pdf">下載 PDF 手冊 <small>7.1 MB</small></a>
     </div>
   </div>
 </header>
@@ -1148,7 +1152,7 @@ html{scroll-behavior:smooth}
   // ---------- home-screen app: service worker + offline copy of the slides ----------
   (function(){
     var chip=document.getElementById('offChip'); if(!chip) return;
-    var label=chip.querySelector('span'), FILES=["slides/taiwan/01.jpg", "slides/taiwan/02.jpg", "slides/taiwan/03.jpg", "slides/taiwan/04.jpg", "slides/taiwan/05.jpg", "slides/taiwan/06.jpg", "slides/taiwan/07.jpg", "slides/taiwan/08.jpg", "slides/taiwan/09.jpg", "slides/taiwan/10.jpg", "slides/taiwan/11.jpg", "slides/taiwan/12.jpg", "slides/taiwan/13.jpg", "slides/taiwan/14.jpg", "slides/taiwan/15.jpg", "slides/taiwan/16.jpg", "slides/taiwan/17.jpg", "slides/taiwan/18.jpg", "slides/taiwan/19.jpg", "slides/taiwan/20.jpg", "slides/taiwan/21.jpg", "slides/taiwan/22.jpg", "slides/taiwan/23.jpg", "slides/taiwan/24.jpg", "slides/taiwan/25.jpg", "slides/taiwan/26.jpg", "slides/taiwan/27.jpg", "slides/taiwan/28.jpg", "slides/taiwan/29.jpg", "slides/taiwan/30.jpg", "slides/taiwan/31.jpg", "slides/taiwan/32.jpg", "slides/taiwan/33.jpg", "slides/taiwan/34.jpg", "slides/taiwan/35.jpg", "slides/taiwan/36.jpg", "slides/taiwan/37.jpg", "slides/taiwan/38.jpg", "slides/taiwan/39.jpg", "slides/taiwan/40.jpg", "slides/taiwan/41.jpg", "slides/taiwan/42.jpg", "slides/taiwan/43.jpg", "slides/taiwan/44.jpg", "slides/taiwan/45.jpg", "slides/taiwan/46.jpg", "slides/taiwan/47.jpg", "slides/taiwan/48.jpg", "slides/taiwan/49.jpg", "slides/taiwan/50.jpg", "slides/dept/01.jpg", "slides/dept/02.jpg", "slides/dept/03.jpg", "slides/dept/04.jpg", "slides/dept/05.jpg", "slides/dept/06.jpg", "slides/dept/07.jpg", "slides/dept/08.jpg", "slides/dept/09.jpg", "slides/dept/10.jpg", "slides/dept/11.jpg", "slides/dept/12.jpg", "slides/taiwan.pdf", "slides/dept.pdf"], CACHE='kl-slides-v1';
+    var label=chip.querySelector('span'), FILES=["slides/taiwan/01.jpg", "slides/taiwan/02.jpg", "slides/taiwan/03.jpg", "slides/taiwan/04.jpg", "slides/taiwan/05.jpg", "slides/taiwan/06.jpg", "slides/taiwan/07.jpg", "slides/taiwan/08.jpg", "slides/taiwan/09.jpg", "slides/taiwan/10.jpg", "slides/taiwan/11.jpg", "slides/taiwan/12.jpg", "slides/taiwan/13.jpg", "slides/taiwan/14.jpg", "slides/taiwan/15.jpg", "slides/taiwan/16.jpg", "slides/taiwan/17.jpg", "slides/taiwan/18.jpg", "slides/taiwan/19.jpg", "slides/taiwan/20.jpg", "slides/taiwan/21.jpg", "slides/taiwan/22.jpg", "slides/taiwan/23.jpg", "slides/taiwan/24.jpg", "slides/taiwan/25.jpg", "slides/taiwan/26.jpg", "slides/taiwan/27.jpg", "slides/taiwan/28.jpg", "slides/taiwan/29.jpg", "slides/taiwan/30.jpg", "slides/taiwan/31.jpg", "slides/taiwan/32.jpg", "slides/taiwan/33.jpg", "slides/taiwan/34.jpg", "slides/taiwan/35.jpg", "slides/taiwan/36.jpg", "slides/taiwan/37.jpg", "slides/taiwan/38.jpg", "slides/taiwan/39.jpg", "slides/taiwan/40.jpg", "slides/taiwan/41.jpg", "slides/taiwan/42.jpg", "slides/taiwan/43.jpg", "slides/taiwan/44.jpg", "slides/taiwan/45.jpg", "slides/taiwan/46.jpg", "slides/taiwan/47.jpg", "slides/taiwan/48.jpg", "slides/taiwan/49.jpg", "slides/taiwan/50.jpg", "slides/dept/01.jpg", "slides/dept/02.jpg", "slides/dept/03.jpg", "slides/dept/04.jpg", "slides/dept/05.jpg", "slides/dept/06.jpg", "slides/dept/07.jpg", "slides/dept/08.jpg", "slides/dept/09.jpg", "slides/dept/10.jpg", "slides/dept/11.jpg", "slides/dept/12.jpg", "slides/taiwan.pdf", "slides/dept.pdf", "handbook.pdf"], CACHE='kl-slides-v1';
     function set(cls,txt){chip.className='off-chip'+(cls?' '+cls:'');label.textContent=txt}
     if(!('serviceWorker' in navigator)||!window.caches){set('','這個瀏覽器不支援離線版');return}
     navigator.serviceWorker.register('sw.js').catch(function(){});
