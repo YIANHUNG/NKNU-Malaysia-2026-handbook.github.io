@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E2661C">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="見習手冊">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>馬來西亞見習活動手冊</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,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">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +20,7 @@
 :root{
   --paper:#fdf6ef; --sheet:#fffaf5; --ink:#3a2a20; --muted:#8a7263; --line:#efdccb;
   --accent:#e2661c; --accent-soft:#fde6d4; --accent-ink:#b44a0c;
-  --sky-tint:#f7d9e8; --sky-ink:#9b3a6b; --sun-tint:#fbefb5; --sun-ink:#7d6200; --teal-tint:#d8efe8; --teal-ink:#1d6656;
+  --sky-tint:#f7d9e8; --sky-ink:#9b3a6b; --sun-tint:#fbefb5; --sun-ink:#7d6200; --teal-tint:#d8efe8; --teal-ink:#1d6656; --dk-tw:#2b7ba3; --dk-tw-soft:#dceef6; --dk-dp:#e07a5f; --dk-dp-soft:#fbe4dc; --on-dk:#ffffff;
   --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
   --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
@@ -21,11 +28,11 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#1d1612; --sheet:#261d18; --ink:#f3e6da; --muted:#b39b8a; --line:#3d2f27;
   --accent:#f08a45; --accent-soft:#3e2516; --accent-ink:#ffb07a;
-  --sky-tint:#3c2131; --sky-ink:#f2a6cd; --sun-tint:#38311a; --sun-ink:#ecd77a; --teal-tint:#173630; --teal-ink:#8fd8c4; color-scheme:dark}}
+  --sky-tint:#3c2131; --sky-ink:#f2a6cd; --sun-tint:#38311a; --sun-ink:#ecd77a; --teal-tint:#173630; --teal-ink:#8fd8c4; --dk-tw:#7cc3e6; --dk-tw-soft:#16303d; --dk-dp:#f2a58f; --dk-dp-soft:#3a221b; --on-dk:#1d1612; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#1d1612; --sheet:#261d18; --ink:#f3e6da; --muted:#b39b8a; --line:#3d2f27;
   --accent:#f08a45; --accent-soft:#3e2516; --accent-ink:#ffb07a;
-  --sky-tint:#3c2131; --sky-ink:#f2a6cd; --sun-tint:#38311a; --sun-ink:#ecd77a; --teal-tint:#173630; --teal-ink:#8fd8c4; color-scheme:dark}
+  --sky-tint:#3c2131; --sky-ink:#f2a6cd; --sun-tint:#38311a; --sun-ink:#ecd77a; --teal-tint:#173630; --teal-ink:#8fd8c4; --dk-tw:#7cc3e6; --dk-tw-soft:#16303d; --dk-dp:#f2a58f; --dk-dp-soft:#3a221b; --on-dk:#1d1612; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.8;margin:0}
@@ -258,6 +265,47 @@ table.sc thead th.today b{color:var(--accent-ink)}
 .day-link:hover{text-decoration:underline}
 @media (max-width:640px){.sc-desk{display:none}}
 @media (min-width:641px){.sc-mob{display:none}}
+
+/* ch.13 slides */
+.dk-intro{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:22px}
+.off-chip{display:inline-flex;align-items:center;gap:7px;font-size:13px;border-radius:999px;padding:3px 12px;background:var(--sheet);border:1px dashed var(--line);color:var(--muted)}
+.off-chip i{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.off-chip.ok{border-style:solid;border-color:var(--teal-ink);color:var(--teal-ink)} .off-chip.ok i{background:var(--teal-ink)}
+.off-chip.busy i{background:var(--accent);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.deck{--dk:var(--dk-tw);--dks:var(--dk-tw-soft);position:relative;background:var(--sheet);border:2px solid var(--dk);border-radius:20px;padding:18px 16px 16px;margin:0 0 34px;box-shadow:5px 6px 0 var(--dks)}
+.deck.dp{--dk:var(--dk-dp);--dks:var(--dk-dp-soft)}
+.deck-tag{position:absolute;top:-15px;left:18px;transform:rotate(-4deg);background:var(--dk);color:var(--on-dk);font-family:var(--mono);font-size:13px;letter-spacing:.06em;padding:3px 12px;border-radius:8px}
+.deck h3{margin:6px 0 2px;color:var(--ink);font-size:22px}
+.deck-sub{font-size:14px;color:var(--muted);margin:0 0 12px}
+.deck-tabs{display:inline-flex;gap:4px;background:var(--dks);border-radius:999px;padding:4px;margin-bottom:12px}
+.deck-tabs button{font:inherit;font-size:14px;border:0;background:none;color:var(--ink);border-radius:999px;padding:5px 14px;cursor:pointer}
+.deck-tabs button[aria-pressed="true"]{background:var(--dk);color:var(--on-dk)}
+.deck-stage{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:12px;overflow:hidden;background:var(--dks)}
+.dk-track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.dk-track::-webkit-scrollbar{display:none}
+.dk-track img{flex:0 0 100%;width:100%;height:100%;object-fit:contain;scroll-snap-align:center;display:block;background:#fff}
+.dk-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#3a2a20;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.dk-nav.prev{left:8px} .dk-nav.next{right:8px}
+.dk-nav:disabled{opacity:.3;cursor:default}
+.dk-count{position:absolute;right:10px;bottom:10px;background:rgba(58,42,32,.78);color:#fff;font-family:var(--mono);font-size:12px;padding:2px 9px;border-radius:999px;font-variant-numeric:tabular-nums}
+.dk-fsbtn{position:absolute;left:10px;bottom:10px;border:0;background:rgba(58,42,32,.78);color:#fff;font:inherit;font-size:12px;padding:3px 10px;border-radius:999px;cursor:pointer}
+.deck-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.dk-canva-msg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px;color:var(--muted);font-size:14px}
+.dk-range{display:flex;align-items:center;gap:10px;margin:12px 2px 4px}
+.dk-range input{flex:1;accent-color:var(--dk)}
+.dk-range span{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:4.5em;text-align:right;font-variant-numeric:tabular-nums}
+.deck-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.dk-btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:14px;font-weight:500;border-radius:999px;padding:7px 16px;border:1.5px solid var(--dk);color:var(--dk);background:transparent}
+.dk-btn.solid{background:var(--dk);color:var(--on-dk)}
+.dk-btn small{font-family:var(--mono);font-weight:400;opacity:.8}
+.deck.fs .deck-stage{position:fixed;inset:0;z-index:50;border-radius:0;aspect-ratio:auto;background:#111;padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
+.deck.fs .dk-track img{background:#111}
+body.dk-lock{overflow:hidden}
+.install-tip{background:var(--sheet);border:1px dashed var(--accent);border-radius:14px;padding:14px 16px;margin-top:8px}
+.install-tip b{color:var(--accent-ink)}
+.install-tip ol{margin:6px 0 0;padding-left:1.3em;font-size:15px}
+@media (prefers-reduced-motion:reduce){.off-chip.busy i{animation:none}}
 footer{padding-block:48px;color:var(--muted);font-size:13px;text-align:center}
 @media (max-width:480px){
   .fest div,.tips li{grid-template-columns:1fr;gap:0}
@@ -299,6 +347,7 @@ html{scroll-behavior:smooth}
     <li><a href="#embassy"><b>10</b>駐馬辦事處</a></li>
     <li><a href="#sched"><b>11</b>課表</a></li>
     <li><a href="#travel"><b>12</b>交通住宿</a></li>
+    <li><a href="#slides"><b>13</b>簡報</a></li>
   </ol>
 </nav>
 
@@ -691,6 +740,54 @@ html{scroll-behavior:smooth}
   <p class="sc-note">以上交通與提醒可能會調整，以群組最新公告為準。</p>
 </section>
 
+<section id="slides">
+  <div class="ch-head"><span class="ch-num">13</span><h2>簡報分享</h2></div>
+  <div class="dk-intro"><p style="margin:0">兩份要在吉臺校分享的簡報。可以直接在這裡左右滑動翻頁，要看動畫或細節就到 Canva。</p><span class="off-chip" id="offChip"><i></i><span>離線版準備中…</span></span></div>
+  <article class="deck tw" data-deck="taiwan" data-n="50" data-canva="https://www.canva.com/design/DAHSqG26rHo/Z-8YslfctAU4NGmK7fZWcg/view">
+    <span class="deck-tag">簡報 1</span>
+    <h3>臺灣文化分享</h3>
+    <p class="deck-sub">認識不一樣的臺灣：景點、族群文化、美食和小知識・共 50 頁</p>
+    <div class="deck-tabs" role="group" aria-label="瀏覽方式"><button type="button" data-mode="slides" aria-pressed="true">翻頁瀏覽</button><button type="button" data-mode="canva" aria-pressed="false">Canva 線上預覽</button></div>
+    <div class="deck-stage">
+      <div class="dk-track" tabindex="0" aria-label="臺灣文化分享 投影片"><img src="slides/taiwan/01.jpg" alt="臺灣文化分享 第 1 頁" width="1280" height="720" loading="eager" decoding="async"><img src="slides/taiwan/02.jpg" alt="臺灣文化分享 第 2 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/03.jpg" alt="臺灣文化分享 第 3 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/04.jpg" alt="臺灣文化分享 第 4 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/05.jpg" alt="臺灣文化分享 第 5 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/06.jpg" alt="臺灣文化分享 第 6 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/07.jpg" alt="臺灣文化分享 第 7 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/08.jpg" alt="臺灣文化分享 第 8 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/09.jpg" alt="臺灣文化分享 第 9 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/10.jpg" alt="臺灣文化分享 第 10 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/11.jpg" alt="臺灣文化分享 第 11 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/12.jpg" alt="臺灣文化分享 第 12 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/13.jpg" alt="臺灣文化分享 第 13 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/14.jpg" alt="臺灣文化分享 第 14 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/15.jpg" alt="臺灣文化分享 第 15 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/16.jpg" alt="臺灣文化分享 第 16 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/17.jpg" alt="臺灣文化分享 第 17 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/18.jpg" alt="臺灣文化分享 第 18 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/19.jpg" alt="臺灣文化分享 第 19 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/20.jpg" alt="臺灣文化分享 第 20 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/21.jpg" alt="臺灣文化分享 第 21 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/22.jpg" alt="臺灣文化分享 第 22 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/23.jpg" alt="臺灣文化分享 第 23 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/24.jpg" alt="臺灣文化分享 第 24 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/25.jpg" alt="臺灣文化分享 第 25 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/26.jpg" alt="臺灣文化分享 第 26 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/27.jpg" alt="臺灣文化分享 第 27 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/28.jpg" alt="臺灣文化分享 第 28 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/29.jpg" alt="臺灣文化分享 第 29 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/30.jpg" alt="臺灣文化分享 第 30 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/31.jpg" alt="臺灣文化分享 第 31 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/32.jpg" alt="臺灣文化分享 第 32 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/33.jpg" alt="臺灣文化分享 第 33 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/34.jpg" alt="臺灣文化分享 第 34 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/35.jpg" alt="臺灣文化分享 第 35 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/36.jpg" alt="臺灣文化分享 第 36 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/37.jpg" alt="臺灣文化分享 第 37 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/38.jpg" alt="臺灣文化分享 第 38 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/39.jpg" alt="臺灣文化分享 第 39 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/40.jpg" alt="臺灣文化分享 第 40 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/41.jpg" alt="臺灣文化分享 第 41 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/42.jpg" alt="臺灣文化分享 第 42 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/43.jpg" alt="臺灣文化分享 第 43 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/44.jpg" alt="臺灣文化分享 第 44 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/45.jpg" alt="臺灣文化分享 第 45 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/46.jpg" alt="臺灣文化分享 第 46 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/47.jpg" alt="臺灣文化分享 第 47 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/48.jpg" alt="臺灣文化分享 第 48 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/49.jpg" alt="臺灣文化分享 第 49 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/taiwan/50.jpg" alt="臺灣文化分享 第 50 頁" width="1280" height="720" loading="lazy" decoding="async"></div>
+      <button class="dk-nav prev" type="button" aria-label="上一頁">‹</button>
+      <button class="dk-nav next" type="button" aria-label="下一頁">›</button>
+      <button class="dk-fsbtn" type="button">全螢幕</button>
+      <span class="dk-count">1 / 50</span>
+    </div>
+    <div class="dk-range"><input type="range" min="1" max="50" value="1" aria-label="跳到第幾頁" id="rg-taiwan"><span>第 1 頁</span></div>
+    <div class="deck-actions">
+      <a class="dk-btn solid" href="https://www.canva.com/design/DAHSqG26rHo/Z-8YslfctAU4NGmK7fZWcg/view" target="_blank" rel="noopener">到 Canva 看細節 ↗</a>
+      <a class="dk-btn" href="slides/taiwan.pdf" download="臺灣文化分享.pdf">下載 PDF <small>4.9 MB</small></a>
+    </div>
+  </article>
+  <article class="deck dp" data-deck="dept" data-n="12" data-canva="https://www.canva.com/design/DAHSpWoowxs/qP3ZgwsRzbBI_r_AVpA6-A/view">
+    <span class="deck-tag">簡報 2</span>
+    <h3>系所簡介</h3>
+    <p class="deck-sub">英語系、國文系、華語所、數學系、生物科技系・共 12 頁</p>
+    <div class="deck-tabs" role="group" aria-label="瀏覽方式"><button type="button" data-mode="slides" aria-pressed="true">翻頁瀏覽</button><button type="button" data-mode="canva" aria-pressed="false">Canva 線上預覽</button></div>
+    <div class="deck-stage">
+      <div class="dk-track" tabindex="0" aria-label="系所簡介 投影片"><img src="slides/dept/01.jpg" alt="系所簡介 第 1 頁" width="1280" height="720" loading="eager" decoding="async"><img src="slides/dept/02.jpg" alt="系所簡介 第 2 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/03.jpg" alt="系所簡介 第 3 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/04.jpg" alt="系所簡介 第 4 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/05.jpg" alt="系所簡介 第 5 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/06.jpg" alt="系所簡介 第 6 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/07.jpg" alt="系所簡介 第 7 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/08.jpg" alt="系所簡介 第 8 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/09.jpg" alt="系所簡介 第 9 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/10.jpg" alt="系所簡介 第 10 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/11.jpg" alt="系所簡介 第 11 頁" width="1280" height="720" loading="lazy" decoding="async"><img src="slides/dept/12.jpg" alt="系所簡介 第 12 頁" width="1280" height="720" loading="lazy" decoding="async"></div>
+      <button class="dk-nav prev" type="button" aria-label="上一頁">‹</button>
+      <button class="dk-nav next" type="button" aria-label="下一頁">›</button>
+      <button class="dk-fsbtn" type="button">全螢幕</button>
+      <span class="dk-count">1 / 12</span>
+    </div>
+    <div class="dk-range"><input type="range" min="1" max="12" value="1" aria-label="跳到第幾頁" id="rg-dept"><span>第 1 頁</span></div>
+    <div class="deck-actions">
+      <a class="dk-btn solid" href="https://www.canva.com/design/DAHSpWoowxs/qP3ZgwsRzbBI_r_AVpA6-A/view" target="_blank" rel="noopener">到 Canva 看細節 ↗</a>
+      <a class="dk-btn" href="slides/dept.pdf" download="系所簡介.pdf">下載 PDF <small>1.2 MB</small></a>
+    </div>
+  </article>
+  <h3>加到手機主畫面</h3>
+  <div class="install-tip">
+    <p style="margin:0">加到主畫面後，手冊會像 App 一樣全螢幕打開，<b>沒網路也看得到</b>上次載入的內容和兩份簡報。</p>
+    <ol>
+      <li><b>iPhone</b>：用 Safari 打開這個網頁 → 下方「分享」→「加入主畫面」。</li>
+      <li><b>Android</b>：用 Chrome 打開 → 右上「⋮」→「加到主畫面」或「安裝應用程式」。</li>
+    </ol>
+  </div>
+</section>
 
 </main>
 <footer>國立高雄師範大學 115 學年度國外教育見習・版面設計 洪懌安</footer>
@@ -1011,6 +1108,65 @@ html{scroll-behavior:smooth}
       list.querySelectorAll('.tk input').forEach(function(c){c.checked=false});update();
     });
     update();
+  })();
+
+
+  // ---------- ch.13 slide decks ----------
+  (function(){
+    var CAN_EMBED=true;
+    [].forEach.call(document.querySelectorAll('.deck'),function(deck){
+      var n=+deck.dataset.n, track=deck.querySelector('.dk-track'), count=deck.querySelector('.dk-count'),
+          prev=deck.querySelector('.prev'), next=deck.querySelector('.next'), rg=deck.querySelector('.dk-range input'),
+          rgl=deck.querySelector('.dk-range span'), stage=deck.querySelector('.deck-stage'), cur=1, frame=null;
+      function cw(){return track.clientWidth||1}
+      function go(i){i=Math.max(1,Math.min(n,i));track.scrollTo({left:(i-1)*cw(),behavior:'smooth'})}
+      function sync(){var i=Math.round(track.scrollLeft/cw())+1;if(i===cur)return;cur=i;count.textContent=i+' / '+n;rg.value=i;rgl.textContent='第 '+i+' 頁';prev.disabled=i===1;next.disabled=i===n}
+      var t; track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(sync,60)});
+      prev.addEventListener('click',function(){go(cur-1)}); next.addEventListener('click',function(){go(cur+1)});
+      prev.disabled=true;
+      rg.addEventListener('input',function(){track.scrollTo({left:(rg.value-1)*cw()});rgl.textContent='第 '+rg.value+' 頁'});
+      track.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(cur+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}});
+      window.addEventListener('resize',function(){track.scrollTo({left:(cur-1)*cw()})});
+      var fsb=deck.querySelector('.dk-fsbtn');
+      function setFs(on){deck.classList.toggle('fs',on);document.body.classList.toggle('dk-lock',on);fsb.textContent=on?'關閉全螢幕':'全螢幕';setTimeout(function(){track.scrollTo({left:(cur-1)*cw()})},30)}
+      fsb.addEventListener('click',function(){setFs(!deck.classList.contains('fs'))});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&deck.classList.contains('fs'))setFs(false)});
+      deck.querySelector('.deck-tabs').addEventListener('click',function(e){
+        var b=e.target.closest('button'); if(!b) return;
+        [].forEach.call(this.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x===b)});
+        var canva=b.dataset.mode==='canva';
+        [track,prev,next,count,fsb].forEach(function(el){el.hidden=canva}); deck.querySelector('.dk-range').hidden=canva;
+        if(canva&&CAN_EMBED&&!frame){
+          if(navigator.onLine===false){var m=document.createElement('div');m.className='dk-canva-msg';m.textContent='目前沒有網路，請先用「翻頁瀏覽」。';stage.appendChild(m);frame=m;return}
+          frame=document.createElement('iframe');frame.src=deck.dataset.canva+'?embed';frame.loading='lazy';frame.allowFullscreen=true;frame.title=deck.querySelector('h3').textContent+' Canva 預覽';stage.appendChild(frame);
+        }
+        if(frame) frame.hidden=!canva;
+      });
+    });
+  })();
+
+  // ---------- home-screen app: service worker + offline copy of the slides ----------
+  (function(){
+    var chip=document.getElementById('offChip'); if(!chip) return;
+    var label=chip.querySelector('span'), FILES=["slides/taiwan/01.jpg", "slides/taiwan/02.jpg", "slides/taiwan/03.jpg", "slides/taiwan/04.jpg", "slides/taiwan/05.jpg", "slides/taiwan/06.jpg", "slides/taiwan/07.jpg", "slides/taiwan/08.jpg", "slides/taiwan/09.jpg", "slides/taiwan/10.jpg", "slides/taiwan/11.jpg", "slides/taiwan/12.jpg", "slides/taiwan/13.jpg", "slides/taiwan/14.jpg", "slides/taiwan/15.jpg", "slides/taiwan/16.jpg", "slides/taiwan/17.jpg", "slides/taiwan/18.jpg", "slides/taiwan/19.jpg", "slides/taiwan/20.jpg", "slides/taiwan/21.jpg", "slides/taiwan/22.jpg", "slides/taiwan/23.jpg", "slides/taiwan/24.jpg", "slides/taiwan/25.jpg", "slides/taiwan/26.jpg", "slides/taiwan/27.jpg", "slides/taiwan/28.jpg", "slides/taiwan/29.jpg", "slides/taiwan/30.jpg", "slides/taiwan/31.jpg", "slides/taiwan/32.jpg", "slides/taiwan/33.jpg", "slides/taiwan/34.jpg", "slides/taiwan/35.jpg", "slides/taiwan/36.jpg", "slides/taiwan/37.jpg", "slides/taiwan/38.jpg", "slides/taiwan/39.jpg", "slides/taiwan/40.jpg", "slides/taiwan/41.jpg", "slides/taiwan/42.jpg", "slides/taiwan/43.jpg", "slides/taiwan/44.jpg", "slides/taiwan/45.jpg", "slides/taiwan/46.jpg", "slides/taiwan/47.jpg", "slides/taiwan/48.jpg", "slides/taiwan/49.jpg", "slides/taiwan/50.jpg", "slides/dept/01.jpg", "slides/dept/02.jpg", "slides/dept/03.jpg", "slides/dept/04.jpg", "slides/dept/05.jpg", "slides/dept/06.jpg", "slides/dept/07.jpg", "slides/dept/08.jpg", "slides/dept/09.jpg", "slides/dept/10.jpg", "slides/dept/11.jpg", "slides/dept/12.jpg", "slides/taiwan.pdf", "slides/dept.pdf"], CACHE='kl-slides-v1';
+    function set(cls,txt){chip.className='off-chip'+(cls?' '+cls:'');label.textContent=txt}
+    if(!('serviceWorker' in navigator)||!window.caches){set('','這個瀏覽器不支援離線版');return}
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+    caches.open(CACHE).then(function(c){
+      return Promise.all(FILES.map(function(f){return c.match(f).then(function(r){return r?null:f})})).then(function(miss){
+        miss=miss.filter(Boolean);
+        if(!miss.length){set('ok','離線版已存好');return}
+        if(navigator.onLine===false){set('','離線版尚未存好，連上網路後打開一次就會下載');return}
+        var done=FILES.length-miss.length, i=0;
+        set('busy','正在存離線版 '+done+' / '+FILES.length);
+        function nextOne(){
+          if(i>=miss.length){set(done===FILES.length?'ok':'',done===FILES.length?'離線版已存好':'有 '+(FILES.length-done)+' 個檔案沒存到，下次打開會再試');return}
+          var f=miss[i++];
+          fetch(f,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return c.put(f,r)}).then(function(){done++;set('busy','正在存離線版 '+done+' / '+FILES.length)}).catch(function(){}).then(nextOne);
+        }
+        nextOne();nextOne();nextOne();
+      });
+    }).catch(function(){set('','離線版暫時無法使用')});
   })();
 
   // ---------- rail highlight ----------

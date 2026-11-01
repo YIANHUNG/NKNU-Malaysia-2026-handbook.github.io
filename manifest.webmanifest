@@ -1,0 +1,16 @@
+{
+  "name": "馬來西亞見習手冊",
+  "short_name": "見習手冊",
+  "description": "115 學年度高師大馬來西亞吉隆坡臺灣學校教育見習手冊",
+  "lang": "zh-Hant-TW",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FDF6EF",
+  "theme_color": "#E2661C",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
