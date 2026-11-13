@@ -196,6 +196,74 @@ figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .ck-restore button{font:inherit;font-size:13px;background:none;border:0;color:var(--accent-ink);text-decoration:underline;cursor:pointer;padding:0}
 .ck-toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);z-index:40;background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 10px 8px 18px;display:flex;gap:12px;align-items:center;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.2);max-width:calc(100% - 32px)}
 .ck-toast[hidden]{display:none}
+/* ---- 07 反思會議 ---- */
+.rf{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:8px 0 28px}
+.rf h3{margin:0 0 10px}
+.rf-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted);margin-bottom:10px}
+.rf-meta b{color:var(--ink);font-weight:600}
+.rf-q{margin:0 0 14px;padding-left:1.3em;font-size:15px;line-height:1.7}
+.rf-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.rf-list li{border:1px solid var(--line);border-radius:8px;padding:8px 12px;display:flex;align-items:baseline;gap:8px;font-size:15px}
+.rf-list .d{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.rf-list .w{font-size:12px;color:var(--muted)}
+.rf-list .who{margin-left:auto;font-weight:700;color:var(--accent-ink)}
+.rf-list .note{flex-basis:100%;font-size:12px;color:var(--muted)}
+.rf-list li{flex-wrap:wrap}
+.rf-list li.past{opacity:.45}
+.rf-list li.now{border-color:var(--accent);background:var(--accent-soft)}
+.rf-src{font-size:12px;color:var(--muted);margin:10px 0 0}
+.rf-tag{display:inline-block;margin-left:6px;font-size:12px;padding:0 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);text-decoration:none;white-space:nowrap}
+/* ---- 14 備忘錄 ---- */
+.mm-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px}
+.mm-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1 1 100%;padding-bottom:2px}
+.mm-tabs::-webkit-scrollbar{display:none}
+.mm-tab{flex:none;font:inherit;font-size:14px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);border-radius:999px;padding:4px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.mm-tab i{width:9px;height:9px;border-radius:50%;background:var(--c-ink)}
+.mm-tab.on{background:var(--c-tint);border-color:var(--c-ink);color:var(--c-ink);font-weight:700}
+.mm-tab.add{color:var(--accent-ink);border-style:dashed}
+.mm-tools{display:flex;gap:6px;margin-left:auto}
+.mm-private{font-size:13px;color:var(--muted);margin:4px 0 16px}
+.c-or{--c-tint:var(--accent-soft);--c-ink:var(--accent-ink)}
+.c-pk{--c-tint:var(--sky-tint);--c-ink:var(--sky-ink)}
+.c-ye{--c-tint:var(--sun-tint);--c-ink:var(--sun-ink)}
+.c-gr{--c-tint:var(--teal-tint);--c-ink:var(--teal-ink)}
+.c-bl{--c-tint:var(--dk-tw-soft);--c-ink:var(--dk-tw)}
+.mm-topic{border:1px solid var(--line);border-top:6px solid var(--c-ink);border-radius:10px;background:var(--sheet);padding:14px 16px 16px}
+.mm-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.mm-title{flex:1;min-width:0;font-family:var(--serif);font-weight:700;font-size:20px;color:var(--c-ink);background:none;border:0;border-bottom:1px dashed transparent;padding:2px 0;outline:none}
+.mm-title:focus{border-bottom-color:var(--line)}
+.mm-colors{display:flex;gap:5px}
+.mm-colors button{width:20px;height:20px;border-radius:50%;border:2px solid var(--sheet);background:var(--c-ink);cursor:pointer;padding:0;box-shadow:0 0 0 1px var(--line)}
+.mm-colors button.on{box-shadow:0 0 0 2px var(--c-ink)}
+.mm-blocks{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.mm-topic,.mm-b{box-sizing:border-box;min-width:0}
+.mm-b{position:relative;border:1px solid var(--line);border-radius:8px;padding:10px 12px 10px;background:var(--paper)}
+.mm-bar{display:flex;gap:2px;justify-content:flex-end;margin:-4px -6px 4px 0}
+.mm-bar span{margin-right:auto;font-size:12px;color:var(--muted)}
+.mm-bar button,.mm-li button{font:inherit;font-size:15px;line-height:1;width:28px;height:26px;border:0;background:none;color:var(--muted);cursor:pointer;border-radius:6px}
+.mm-bar button:hover,.mm-li button:hover{background:var(--accent-soft);color:var(--accent-ink)}
+.mm-bar button:disabled{opacity:.25;cursor:default;background:none}
+.mm-text{width:100%;box-sizing:border-box;font:inherit;font-size:16px;line-height:1.7;color:var(--ink);background:none;border:0;outline:none;resize:none;overflow:hidden;min-height:3.4em;padding:0}
+.mm-li{display:flex;align-items:center;gap:8px;padding:2px 0}
+.mm-li input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);flex:none;margin:0}
+.mm-li input[type=text]{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--ink);background:none;border:0;border-bottom:1px solid transparent;outline:none;padding:3px 0}
+.mm-li input[type=text]:focus{border-bottom-color:var(--line)}
+.mm-li.done input[type=text]{text-decoration:line-through;color:var(--muted)}
+.mm-addli{display:flex;gap:8px;margin-top:4px}
+.mm-addli input{flex:1;min-width:0;font:inherit;font-size:15px;color:var(--ink);background:none;border:1px dashed var(--line);border-radius:6px;padding:5px 10px;outline:none}
+.mm-img img{display:block;max-width:100%;max-height:420px;border-radius:6px;margin:0 auto}
+.mm-cap{width:100%;box-sizing:border-box;margin-top:6px;font:inherit;font-size:14px;color:var(--ink);background:none;border:0;border-bottom:1px dashed var(--line);outline:none;padding:3px 0}
+.mm-add{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.mm-add button{font:inherit;font-size:14px;border:1px dashed var(--c-ink);color:var(--c-ink);background:var(--c-tint);border-radius:8px;padding:6px 14px;cursor:pointer}
+.mm-foot{display:flex;justify-content:flex-end;margin-top:12px}
+.mm-empty{border:1px dashed var(--line);border-radius:10px;padding:22px 18px;text-align:center;color:var(--muted);font-size:15px}
+.mm-empty .mm-add{justify-content:center}
+.mm-empty .mm-add button{--c-tint:var(--accent-soft);--c-ink:var(--accent-ink)}
+.mm-sugg{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;margin-top:14px;font-size:13px}
+.mm-sugg button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--sheet);color:var(--muted);border-radius:999px;padding:3px 11px;cursor:pointer}
+.mm-sugg button:hover{border-color:var(--accent);color:var(--accent-ink)}
+.mm-help{font-size:13px;color:var(--muted);margin-top:14px;line-height:1.7}
+
 .ck-toast button{font:inherit;font-size:13px;font-weight:700;border:0;border-radius:999px;background:var(--accent);color:#fff;padding:3px 12px;cursor:pointer}
 .ck-del{margin-left:auto;background:none;border:0;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:0 4px}
 .ck-del:hover{color:var(--accent-ink)}
@@ -376,6 +444,7 @@ html{scroll-behavior:smooth}
     <li><a href="#sched"><b>11</b>課表</a></li>
     <li><a href="#travel"><b>12</b>交通住宿</a></li>
     <li><a href="#slides"><b>13</b>簡報</a></li>
+    <li><a href="#memo"><b>14</b>備忘錄</a></li>
   </ol>
 </nav>
 
@@ -646,6 +715,13 @@ html{scroll-behavior:smooth}
 <section id="tasks">
   <div class="ch-head"><span class="ch-num">07</span><h2>見習任務</h2></div>
   <div class="dl-row"><a class="maplink" href="https://reurl.cc/bea51y" target="_blank" rel="noopener">見習表單檔案下載 ↗</a></div>
+  <div class="rf" id="reflect">
+    <h3>反思會議</h3>
+    <div class="rf-meta" id="rfMeta"></div>
+    <ol class="rf-q" id="rfQ"></ol>
+    <ol class="rf-list" id="rfList"></ol>
+    <p class="rf-src" id="rfSrc"></p>
+  </div>
   <div class="tk-bar">
     <div class="meter" role="progressbar" aria-label="見習任務完成進度" aria-valuemin="0" aria-valuemax="100" id="tkMeter"><span></span></div>
     <span class="ck-count" id="tkCount">0 / 13 已完成</span>
@@ -820,6 +896,22 @@ html{scroll-behavior:smooth}
   </div>
 </section>
 
+<section id="memo">
+  <div class="ch-head"><span class="ch-num">14</span><h2>備忘錄</h2></div>
+  <div class="mm-top">
+    <div class="mm-tabs" id="mmTabs" role="tablist" aria-label="主題"></div>
+    <div class="mm-tools">
+      <button class="btn" id="mmExport" type="button">匯出備份</button>
+      <button class="btn" id="mmImportBtn" type="button">匯入</button>
+      <input type="file" id="mmImport" accept=".json,application/json" hidden>
+    </div>
+  </div>
+  <p class="mm-private" id="mmPrivate">🔒 只存在這台裝置的瀏覽器裡，其他人看不到。</p>
+  <div id="mmBody"></div>
+  <p class="mm-help">換裝置或想讓兩台資料一致：在原本的裝置按「匯出備份」，把檔案傳給自己，再到另一台按「匯入」。匯入會自動合併，同一個主題以較晚修改的版本為準，兩台各自新增的主題都會保留。</p>
+  <div class="ck-toast" id="mmToast" role="status" hidden></div>
+</section>
+
 </main>
 <footer>國立高雄師範大學 115 學年度國外教育見習・版面設計 洪懌安</footer>
 
@@ -851,7 +943,7 @@ html{scroll-behavior:smooth}
     if(x.p) h+='<p>'+x.p+'</p>'; else h+='<ol>'+x.items.map(function(i){return '<li>'+i+'</li>'}).join('')+'</ol>';
     if(x.x) h+='<a class="day-link" href="#travel">看交通安排 →</a>';
     if(x.k) h+='<a class="day-link" href="#sched" data-w="'+x.k[0]+'" data-d="'+x.k[1]+'">看當天課表 →</a>';
-    el.innerHTML=h; box.appendChild(el);
+    el.innerHTML=h; el.setAttribute('data-date',x.d); box.appendChild(el);
   });
   // countdown
   var start=new Date(2026,10,16), end=new Date(2026,10,28,23,59);
@@ -1250,6 +1342,243 @@ html{scroll-behavior:smooth}
     root.setAttribute('data-theme',t); label();
     try{localStorage.setItem('kl-theme',t)}catch(e){}
   });
+})();
+
+/* ---- 07 反思會議（資料來自 Google Sheet「反思會議」分頁） ---- */
+(function(){
+  var ID='1SQmuB3Zj9pis326P3nelRM-HhRHxP0lBpKG13ckx1J4', TAB='反思會議';
+  var SNAP={rows:[["11/17","二","君慧",""],["11/18","三","煒庭",""],["11/19","四","懌安",""],["11/20","五","名妤",""],["11/23","一","名妤",""],["11/24","二","懌安",""],["11/25","三","煒庭",""],["11/26","四","沁洋",""]].map(function(r){return {'日期':r[0],'星期':r[1],'記錄人':r[2],'備註':r[3]}}),
+            info:[{'項目':'時間','內容':'晚餐前，約 30 分鐘'},{'項目':'討論方向 1','內容':'今日的觀察與省思'},{'項目':'討論方向 2','內容':'對於我未來教學的啟發'}]};
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  function parse(t){
+    var rows=[],row=[],f='',q=false;
+    for(var i=0;i<t.length;i++){var ch=t[i];
+      if(q){if(ch==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=ch}
+      else if(ch==='"')q=true; else if(ch===','){row.push(f);f=''} else if(ch==='\n'){row.push(f);rows.push(row);row=[];f=''} else if(ch!=='\r')f+=ch}
+    if(f!==''||row.length){row.push(f);rows.push(row)}
+    var hd=(rows.shift()||[]).map(function(x){return x.trim()});
+    return {head:hd,rows:rows.filter(function(r){return r.some(function(x){return x.trim()})}).map(function(r){var o={};hd.forEach(function(h,i){o[h]=(r[i]||'').trim()});return o})};
+  }
+  function get(range,need){
+    var url='https://docs.google.com/spreadsheets/d/'+ID+'/gviz/tq?tqx=out:csv&headers=1&sheet='+encodeURIComponent(TAB)+'&range='+range+'&_='+Date.now();
+    return fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){
+      var p=parse(t); if(!need.every(function(h){return p.head.indexOf(h)>=0}))throw 0; return p.rows});
+  }
+  var now=new Date(), today=(now.getMonth()+1)+'/'+now.getDate();
+  function md(s){var m=String(s).match(/(\d+)\s*\/\s*(\d+)/);return m?(+m[1])*100+(+m[2]):0}
+  function render(d,src){
+    var info=d.info.filter(function(r){return r['項目']&&r['內容']});
+    var meta=info.filter(function(r){return !/討論|方向/.test(r['項目'])}), qs=info.filter(function(r){return /討論|方向/.test(r['項目'])});
+    document.getElementById('rfMeta').innerHTML='<span><b>'+d.rows.length+'</b> 場</span>'+meta.map(function(r){return '<span>'+esc(r['項目'])+'：<b>'+esc(r['內容'])+'</b></span>'}).join('');
+    document.getElementById('rfQ').innerHTML=qs.map(function(r){return '<li>'+esc(r['內容'])+'</li>'}).join('');
+    var t=md(today);
+    document.getElementById('rfList').innerHTML=d.rows.filter(function(r){return r['日期']}).map(function(r){
+      var k=md(r['日期']), c=now.getFullYear()===2026&&now.getMonth()===10?(k===t?' class="now"':k<t?' class="past"':''):'';
+      return '<li'+c+'><span class="d">'+esc(r['日期'])+'</span><span class="w">'+esc(r['星期']||'')+'</span><span class="who">'+esc(r['記錄人']||'—')+'</span>'+(r['備註']?'<span class="note">'+esc(r['備註'])+'</span>':'')+'</li>'}).join('');
+    document.getElementById('rfSrc').textContent=src;
+    // 00 行程總覽：在「反思會議」那一行加上記錄人
+    [].forEach.call(document.querySelectorAll('.rf-tag'),function(x){x.remove()});
+    d.rows.forEach(function(r){
+      var card=document.querySelector('.day[data-date="'+(r['日期']||'').replace(/\s/g,'')+'"]'); if(!card||!r['記錄人']) return;
+      var li=[].filter.call(card.querySelectorAll('li'),function(x){return x.textContent.indexOf('反思會議')>=0})[0]; if(!li) return;
+      var a=document.createElement('a'); a.className='rf-tag'; a.href='#reflect'; a.textContent='記錄 '+r['記錄人']; li.appendChild(a);
+    });
+  }
+  var cache=null; try{cache=JSON.parse(lsGet('kl-reflect-cache')||'null')}catch(e){}
+  render(cache&&cache.d?cache.d:SNAP, cache&&cache.at?'離線顯示 '+cache.at+' 的版本':'');
+  Promise.all([get('A1:D40',['日期','記錄人']),get('F1:G20',['項目','內容']).catch(function(){return null})]).then(function(r){
+    if(!r[0].length) throw 0;
+    var d={rows:r[0],info:r[1]&&r[1].length?r[1]:(cache&&cache.d?cache.d.info:SNAP.info)};
+    var at=(now.getMonth()+1)+'/'+now.getDate()+' '+('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
+    lsSet('kl-reflect-cache',JSON.stringify({at:at,d:d})); render(d,'');
+  }).catch(function(){});
+})();
+
+/* ---- 14 備忘錄：只存在這台裝置（IndexedDB），可匯出／匯入合併 ---- */
+(function(){
+  var COLORS=['or','pk','ye','gr','bl'];
+  var topics=[], tombs={}, cur=null, mem=false, db=null;
+  var body=document.getElementById('mmBody'), tabs=document.getElementById('mmTabs');
+  function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+  // ---------- storage ----------
+  function openDB(){return new Promise(function(res,rej){
+    try{var rq=indexedDB.open('kl-memo',1);
+      rq.onupgradeneeded=function(){var d=rq.result;d.createObjectStore('topics',{keyPath:'id'});d.createObjectStore('meta')};
+      rq.onsuccess=function(){res(rq.result)}; rq.onerror=function(){rej(rq.error)};
+    }catch(e){rej(e)}})}
+  function loadAll(){return new Promise(function(res,rej){
+    var tx=db.transaction(['topics','meta']), out=[];
+    tx.objectStore('topics').openCursor().onsuccess=function(e){var c=e.target.result;if(c){out.push(c.value);c.continue()}};
+    var mr=tx.objectStore('meta').get('tombs'); tx.oncomplete=function(){res({topics:out,tombs:mr.result||{}})}; tx.onerror=function(){rej(tx.error)};
+  })}
+  var pend={}, timer=null;
+  function persist(t){ if(t){t.updated=Date.now(); pend[t.id]=t} clearTimeout(timer); timer=setTimeout(flush,350) }
+  function flush(){
+    if(mem||!db){pend={};return}
+    var tx=db.transaction(['topics','meta'],'readwrite'), st=tx.objectStore('topics');
+    Object.keys(pend).forEach(function(id){ if(pend[id].dead) st.delete(id); else st.put(pend[id]) });
+    tx.objectStore('meta').put(tombs,'tombs'); pend={};
+    tx.onerror=function(){toast('儲存失敗，裝置空間可能不足')};
+  }
+  window.addEventListener('pagehide',flush);
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')flush()});
+  // ---------- toast ----------
+  var tt, tb=document.getElementById('mmToast');
+  function toast(msg,undo){
+    clearTimeout(tt); tb.innerHTML=''; var sp=document.createElement('span'); sp.textContent=msg; tb.appendChild(sp);
+    if(undo){var b=document.createElement('button');b.type='button';b.textContent='復原';b.addEventListener('click',function(){undo();tb.hidden=true});tb.appendChild(b)}
+    tb.hidden=false; tt=setTimeout(function(){tb.hidden=true},6000);
+  }
+  // ---------- helpers ----------
+  function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+  function sorted(){return topics.slice().sort(function(a,b){return a.created-b.created})}
+  function topic(){return topics.filter(function(t){return t.id===cur})[0]}
+  function grow(ta){ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'}
+  function newTopic(name){
+    var t={id:uid(),title:name||'新主題',color:COLORS[topics.length%COLORS.length],created:Date.now(),updated:Date.now(),blocks:[]};
+    topics.push(t); cur=t.id; persist(t); return t;
+  }
+  function addBlock(t,type,extra){
+    var b={id:uid(),type:type};
+    if(type==='text') b.text=''; if(type==='list') b.items=[]; if(type==='img'){b.src=extra;b.cap=''}
+    t.blocks.push(b); persist(t); render(); 
+    var last=body.querySelector('.mm-b:last-child'); if(last){var f=last.querySelector('textarea,.mm-addli input,.mm-cap'); if(f) f.focus(); last.scrollIntoView({block:'nearest'})}
+  }
+  function pickImage(t){
+    var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*';
+    inp.onchange=function(){var f=inp.files&&inp.files[0]; if(!f) return;
+      var fr=new FileReader(); fr.onload=function(){var im=new Image(); im.onload=function(){
+        var M=1280, k=Math.min(1,M/Math.max(im.width,im.height)), c=document.createElement('canvas');
+        c.width=Math.round(im.width*k); c.height=Math.round(im.height*k); c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+        addBlock(t,'img',c.toDataURL('image/jpeg',0.8));
+      }; im.onerror=function(){toast('這張圖片讀不進來')}; im.src=fr.result}; fr.readAsDataURL(f)};
+    inp.click();
+  }
+  // ---------- render ----------
+  function renderTabs(){
+    tabs.innerHTML='';
+    sorted().forEach(function(t){
+      var b=el('button','mm-tab c-'+t.color+(t.id===cur?' on':'')); b.type='button'; b.setAttribute('role','tab');
+      b.appendChild(el('i')); b.appendChild(document.createTextNode(t.title||'未命名'));
+      b.onclick=function(){cur=t.id;render()}; tabs.appendChild(b);
+    });
+    var a=el('button','mm-tab add','＋ 主題'); a.type='button'; a.onclick=function(){newTopic();render();var ti=body.querySelector('.mm-title');if(ti){ti.focus();ti.select()}}; tabs.appendChild(a);
+  }
+  function addBar(t){
+    var box=el('div','mm-add');
+    [['text','＋ 文字'],['list','＋ 清單'],['img','＋ 圖片']].forEach(function(x){
+      var b=el('button',null,x[1]); b.type='button';
+      b.onclick=function(){ if(!t){t=newTopic('雜記')} if(x[0]==='img') pickImage(t); else addBlock(t,x[0]) };
+      box.appendChild(b);
+    });
+    return box;
+  }
+  function render(){
+    if(cur&&!topic()) cur=null;
+    if(!cur&&topics.length) cur=sorted()[0].id;
+    renderTabs(); body.innerHTML='';
+    var t=topic();
+    if(!t){
+      var e=el('div','mm-empty'); e.appendChild(el('p',null,'還沒有備忘錄。'));
+      e.firstChild.style.margin='0';
+      var q=el('div','mm-add'), nb=el('button',null,'＋ 新增主題'); nb.type='button';
+      nb.onclick=function(){newTopic();render();var ti=body.querySelector('.mm-title');if(ti){ti.focus();ti.select()}}; q.appendChild(nb);
+      var sg=el('div','mm-sugg'); sg.appendChild(el('span',null,'或從這些開始：'));
+      [['待辦事項','list'],['觀課筆記','text'],['教學靈感','text'],['想問的問題','list'],['生活雜記','text']].forEach(function(x){
+        var b=el('button',null,x[0]); b.type='button'; b.onclick=function(){var t=newTopic(x[0]); addBlock(t,x[1])}; sg.appendChild(b)});
+      e.appendChild(q); e.appendChild(sg); body.appendChild(e); return;
+    }
+    var card=el('div','mm-topic c-'+t.color);
+    var head=el('div','mm-head');
+    var ti=el('input','mm-title'); ti.value=t.title; ti.maxLength=24; ti.setAttribute('aria-label','主題名稱');
+    ti.oninput=function(){t.title=ti.value; persist(t); var on=tabs.querySelector('.on'); if(on) on.lastChild.textContent=ti.value||'未命名'};
+    head.appendChild(ti);
+    var cs=el('div','mm-colors'); COLORS.forEach(function(c){var b=el('button','c-'+c+(c===t.color?' on':''));b.type='button';b.setAttribute('aria-label','換顏色');b.onclick=function(){t.color=c;persist(t);render()};cs.appendChild(b)});
+    head.appendChild(cs); card.appendChild(head);
+    var list=el('div','mm-blocks');
+    t.blocks.forEach(function(b,i){ list.appendChild(block(t,b,i)) });
+    card.appendChild(list); card.appendChild(addBar(t));
+    var foot=el('div','mm-foot'), del=el('button','btn','刪除這個主題'); del.type='button';
+    del.onclick=function(){
+      var idx=topics.indexOf(t); topics.splice(idx,1); tombs[t.id]=Date.now(); pend[t.id]={id:t.id,dead:true}; persist(); cur=null; render();
+      toast('已刪除主題「'+t.title+'」',function(){ delete tombs[t.id]; topics.splice(idx,0,t); cur=t.id; persist(t); render() });
+    };
+    foot.appendChild(del); card.appendChild(foot); body.appendChild(card);
+    [].forEach.call(card.querySelectorAll('.mm-text'),grow);
+  }
+  function block(t,b,i){
+    var box=el('div','mm-b'+(b.type==='img'?' mm-img':''));
+    var bar=el('div','mm-bar'); bar.appendChild(el('span',null,{text:'文字',list:'清單',img:'圖片'}[b.type]));
+    function btn(txt,lab,fn,dis){var x=el('button',null,txt);x.type='button';x.setAttribute('aria-label',lab);x.disabled=!!dis;x.onclick=fn;bar.appendChild(x)}
+    btn('↑','上移',function(){t.blocks.splice(i,1);t.blocks.splice(i-1,0,b);persist(t);render()},i===0);
+    btn('↓','下移',function(){t.blocks.splice(i,1);t.blocks.splice(i+1,0,b);persist(t);render()},i===t.blocks.length-1);
+    btn('×','刪除',function(){t.blocks.splice(i,1);persist(t);render();toast('已刪除一則'+{text:'文字',list:'清單',img:'圖片'}[b.type],function(){t.blocks.splice(i,0,b);persist(t);render()})});
+    box.appendChild(bar);
+    if(b.type==='text'){
+      var ta=el('textarea','mm-text'); ta.value=b.text; ta.placeholder='寫點什麼…'; ta.rows=2;
+      ta.oninput=function(){b.text=ta.value;grow(ta);persist(t)}; box.appendChild(ta);
+    } else if(b.type==='list'){
+      b.items.forEach(function(it,j){
+        var row=el('div','mm-li'+(it.done?' done':''));
+        var cb=el('input'); cb.type='checkbox'; cb.checked=!!it.done; cb.onchange=function(){it.done=cb.checked;row.classList.toggle('done',it.done);persist(t)};
+        var tx=el('input'); tx.type='text'; tx.value=it.t; tx.setAttribute('aria-label','項目'); tx.oninput=function(){it.t=tx.value;persist(t)};
+        var x=el('button',null,'×'); x.type='button'; x.setAttribute('aria-label','刪除項目');
+        x.onclick=function(){b.items.splice(j,1);persist(t);render();toast('已刪除「'+(it.t||'項目')+'」',function(){b.items.splice(j,0,it);persist(t);render()})};
+        row.appendChild(cb);row.appendChild(tx);row.appendChild(x);box.appendChild(row);
+      });
+      var ad=el('div','mm-addli'), inp=el('input'); inp.type='text'; inp.placeholder='＋ 新增項目，按 Enter'; inp.enterKeyHint='enter';
+      inp.onkeydown=function(e){ if(e.key==='Enter'&&!e.isComposing){ var v=inp.value.trim(); if(!v) return; e.preventDefault();
+        b.items.push({t:v,done:false}); persist(t); render();
+        var again=body.querySelectorAll('.mm-b')[i].querySelector('.mm-addli input'); if(again) again.focus() } };
+      ad.appendChild(inp); box.appendChild(ad);
+    } else {
+      var im=el('img'); im.src=b.src; im.alt=b.cap||'備忘圖片'; im.loading='lazy'; box.appendChild(im);
+      var cap=el('input','mm-cap'); cap.type='text'; cap.placeholder='圖片說明（可不填）'; cap.value=b.cap||''; cap.oninput=function(){b.cap=cap.value;persist(t)};
+      box.appendChild(cap);
+    }
+    return box;
+  }
+  // ---------- export / import ----------
+  document.getElementById('mmExport').onclick=function(){
+    flush();
+    var d=new Date(), name='見習備忘錄-'+(d.getMonth()+1)+(('0'+d.getDate()).slice(-2))+'-'+('0'+d.getHours()).slice(-2)+('0'+d.getMinutes()).slice(-2)+'.json';
+    var json=JSON.stringify({app:'kl-memo',v:1,exported:Date.now(),topics:topics,tombs:tombs});
+    var file; try{file=new File([json],name,{type:'application/json'})}catch(e){}
+    if(file&&navigator.canShare&&navigator.canShare({files:[file]})){
+      navigator.share({files:[file],title:'見習備忘錄備份'}).catch(function(){});
+    } else {
+      var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([json],{type:'application/json'})); a.download=name;
+      document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1000);
+      toast('已下載備份檔');
+    }
+  };
+  var fin=document.getElementById('mmImport');
+  document.getElementById('mmImportBtn').onclick=function(){fin.value='';fin.click()};
+  fin.onchange=function(){
+    var f=fin.files&&fin.files[0]; if(!f) return;
+    var fr=new FileReader(); fr.onload=function(){
+      var d; try{d=JSON.parse(fr.result)}catch(e){} 
+      if(!d||d.app!=='kl-memo'||!Array.isArray(d.topics)){toast('這不是備忘錄的備份檔');return}
+      var add=0,upd=0,rm=0, by={}; topics.forEach(function(t){by[t.id]=t});
+      Object.keys(d.tombs||{}).forEach(function(id){ var at=d.tombs[id];
+        if(by[id]&&by[id].updated<=at){topics.splice(topics.indexOf(by[id]),1);pend[id]={id:id,dead:true};delete by[id];rm++}
+        if(!tombs[id]||tombs[id]<at) tombs[id]=at; });
+      d.topics.forEach(function(t){
+        if(!t||!t.id||!Array.isArray(t.blocks)) return;
+        if(tombs[t.id]&&tombs[t.id]>=t.updated) return;
+        if(!by[t.id]){topics.push(t);pend[t.id]=t;add++}
+        else if(t.updated>by[t.id].updated){topics[topics.indexOf(by[t.id])]=t;pend[t.id]=t;upd++}
+      });
+      clearTimeout(timer); flush(); render();
+      toast(add||upd||rm?'匯入完成：新增 '+add+'、更新 '+upd+(rm?'、刪除 '+rm:'')+' 個主題':'匯入完成，內容已經一致');
+    }; fr.readAsText(f);
+  };
+  // ---------- start ----------
+  openDB().then(function(d){db=d;return loadAll()}).then(function(r){topics=r.topics;tombs=r.tombs;render()})
+  .catch(function(){mem=true;document.getElementById('mmPrivate').textContent='⚠️ 這個瀏覽器不能存資料，關掉頁面後內容會消失。請用手冊網頁版或主畫面圖示開啟。';render()});
+  try{if(navigator.storage&&navigator.storage.persist) navigator.storage.persist()}catch(e){}
 })();
 </script>
 
