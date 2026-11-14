@@ -1487,10 +1487,10 @@ html{scroll-behavior:smooth}
   document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')flush()});
   // ---------- toast ----------
   var tt, tb=document.getElementById('mmToast');
-  function toast(msg,undo){
+  function toast(msg,undo,label,ms){
     clearTimeout(tt); tb.innerHTML=''; var sp=document.createElement('span'); sp.textContent=msg; tb.appendChild(sp);
-    if(undo){var b=document.createElement('button');b.type='button';b.textContent='復原';b.addEventListener('click',function(){undo();tb.hidden=true});tb.appendChild(b)}
-    tb.hidden=false; tt=setTimeout(function(){tb.hidden=true},6000);
+    if(undo){var b=document.createElement('button');b.type='button';b.textContent=label||'復原';b.addEventListener('click',function(){tb.hidden=true;undo()});tb.appendChild(b)}
+    tb.hidden=false; tt=setTimeout(function(){tb.hidden=true},ms||6000);
   }
   // ---------- helpers ----------
   function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
@@ -1950,14 +1950,15 @@ html{scroll-behavior:smooth}
     var d=new Date(), name='見習手冊備份-'+(d.getMonth()+1)+(('0'+d.getDate()).slice(-2))+'-'+('0'+d.getHours()).slice(-2)+('0'+d.getMinutes()).slice(-2)+'.json';
     var ls={}; LSKEYS.forEach(function(k){ var v=lsGet(k); if(v!=null) ls[k]=v });
     var json=JSON.stringify({app:'kl-handbook',v:2,exported:Date.now(),memo:{topics:topics,tombs:tombs},ls:ls});
-    var file; try{file=new File([json],name,{type:'application/json'})}catch(e){}
-    if(file&&navigator.canShare&&navigator.canShare({files:[file]})){
-      navigator.share({files:[file],title:'見習手冊備份'}).catch(function(){});
-    } else {
-      var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([json],{type:'application/json'})); a.download=name;
-      document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1000);
-      toast('已下載備份檔');
-    }
+    // 先直接下載（每個瀏覽器都支援）；手機可以再按「分享」傳到 LINE 等 App
+    try{
+      var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([json],{type:'application/octet-stream'})); a.download=name; a.rel='noopener';
+      document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},4000);
+    }catch(e){}
+    var file=null; try{file=new File([json],name,{type:'text/plain'})}catch(e){}
+    var canShare=false; try{canShare=!!(file&&navigator.canShare&&navigator.canShare({files:[file]}))}catch(e){}
+    if(canShare) toast('已下載「'+name+'」，也可以直接分享',function(){ navigator.share({files:[file],title:'見習手冊備份'}).catch(function(err){ if(err&&err.name!=='AbortError') toast('這台裝置不能直接分享，請到「下載」資料夾找檔案') }) },'分享',10000);
+    else toast('已下載「'+name+'」，在「下載」資料夾',null,null,8000);
   };
   function mergeMemo(d){
     var add=0,upd=0,rm=0, by={}; topics.forEach(function(t){by[t.id]=t});
