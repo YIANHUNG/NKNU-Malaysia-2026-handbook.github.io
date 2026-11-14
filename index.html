@@ -287,7 +287,13 @@ figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .mm-fmt button{font:inherit;font-size:15px;min-width:34px;height:30px;border:0;border-radius:6px;background:none;color:var(--ink);cursor:pointer;padding:0 8px}
 .mm-fmt button.on{background:var(--accent-soft);color:var(--accent-ink)}
 .mm-fmt .b{font-weight:800}.mm-fmt .i{font-style:italic;font-family:var(--serif)}.mm-fmt .u{text-decoration:underline}.mm-fmt .s{text-decoration:line-through}
-.mm-draw canvas{display:block;width:100%;aspect-ratio:8/5;border-radius:6px;border:1px solid var(--line);touch-action:none;background:#fffdf8;cursor:crosshair}
+.mm-cvwrap{position:relative;width:100%;border-radius:6px;border:1px solid var(--line);overflow:hidden;background:#fffdf8}
+.mm-cvwrap canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
+.mm-cvwrap canvas.ink{touch-action:none;cursor:crosshair}
+.mm-cvtext{position:absolute;z-index:3;margin:0;padding:0 2px;border:1px dashed var(--accent);border-radius:4px;background:rgba(255,253,248,.85);outline:none;resize:none;overflow:hidden;white-space:pre;font-weight:500;min-width:80px}
+.mm-drow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%}
+.mm-dtools .tl.ic{padding:0;width:34px;justify-content:center}
+.mm-tpl{font:inherit;font-size:13px;height:32px;border-radius:6px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);padding:0 6px;cursor:pointer}
 .mm-dtools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:8px}
 .mm-dtools .sw{width:24px;height:24px;border-radius:50%;border:2px solid var(--sheet);box-shadow:0 0 0 1px var(--line);cursor:pointer;padding:0}
 .mm-dtools .sw.on{box-shadow:0 0 0 2px var(--accent)}
@@ -297,6 +303,11 @@ figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .mm-dtools .tl{font:inherit;font-size:13px;height:32px;border-radius:6px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer;padding:0 9px 0 7px;display:inline-flex;align-items:center;gap:4px}
 .mm-dtools .tl svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .mm-dtools .tl.on{color:var(--accent-ink)}
+.mm-b.mm-full{position:fixed;inset:0;z-index:100;border-radius:0;border:0;margin:0;overflow-y:auto;overscroll-behavior:contain;background:var(--paper);padding:calc(env(safe-area-inset-top,0px) + 8px) 12px calc(env(safe-area-inset-bottom,0px) + 24px)}
+.mm-b.mm-full .mm-bar{display:none}
+.mm-b.mm-full .mm-dtools{position:sticky;top:calc(-8px - env(safe-area-inset-top,0px));z-index:2;background:var(--paper);margin:0 -12px 10px;padding:8px 12px;border-bottom:1px solid var(--line)}
+.mm-b.mm-full .mm-cvwrap{max-width:900px;margin:0 auto}
+html.mm-noscroll,html.mm-noscroll body{overflow:hidden}
 .mm-dtools .sep{width:1px;height:20px;background:var(--line);margin:0 2px}
 .bk{margin:64px 0 0;scroll-margin-top:64px;border:1px solid var(--line);border-radius:12px;background:var(--sheet);padding:20px 20px 16px}
 .bk h3{margin:0 0 8px}
@@ -1718,65 +1729,177 @@ html{scroll-behavior:smooth}
   function grip(lab){ var g=el('span','mm-grip','⠿'); g.setAttribute('role','button'); g.setAttribute('aria-label',lab||'按住拖曳排序'); return g }
   // ---- 繪圖 ----
   var DW=1000, DH=625, BG='#fffdf8', PENS=['#2b2420','#E2661C','#d23c3c','#2a74d0','#2e9a66','#9b59b6'], SIZES=[3,7,14];
+  var SV=function(d){return '<svg viewBox="0 0 24 24">'+d+'</svg>'};
   var ICO={
-    erase:'<svg viewBox="0 0 24 24"><path d="M8 20h12"/><path d="M4.6 15.4l8.8-8.8a2 2 0 0 1 2.8 0l2.2 2.2a2 2 0 0 1 0 2.8L11 19H7.8z"/><path d="M9 11l5 5"/></svg>',
-    obj:'<svg viewBox="0 0 24 24"><path d="M3 15c3-6 6-6 8-2s5 4 9-3"/><path d="M15 17l5 5M20 17l-5 5"/></svg>',
-    undo:'<svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>',
-    clear:'<svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13"/><path d="M9 7V4h6v3"/></svg>',
-    pen:'<svg viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 0 1 3 3L8 19z"/><path d="M14.5 6.5l3 3"/></svg>'};
+    pen:SV('<path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 0 1 3 3L8 19z"/><path d="M14.5 6.5l3 3"/>'),
+    line:SV('<path d="M5 19L19 5"/>'),
+    rect:SV('<rect x="4" y="6" width="16" height="12"/>'),
+    rrect:SV('<rect x="4" y="6" width="16" height="12" rx="4"/>'),
+    ellipse:SV('<ellipse cx="12" cy="12" rx="8.5" ry="7"/>'),
+    text:SV('<path d="M5 6V4h14v2"/><path d="M12 4v16"/><path d="M9 20h6"/>'),
+    erase:SV('<path d="M8 20h12"/><path d="M4.6 15.4l8.8-8.8a2 2 0 0 1 2.8 0l2.2 2.2a2 2 0 0 1 0 2.8L11 19H7.8z"/><path d="M9 11l5 5"/>'),
+    obj:SV('<path d="M3 15c3-6 6-6 8-2s5 4 9-3"/><path d="M15 17l5 5M20 17l-5 5"/>'),
+    undo:SV('<path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>'),
+    clear:SV('<path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13"/><path d="M9 7V4h6v3"/>'),
+    ext:SV('<path d="M4 4h16"/><path d="M12 8v12"/><path d="M7 15l5 5 5-5"/>'),
+    full:SV('<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>'),
+    exit:SV('<path d="M5 12l5 5 9-10"/>')};
+  var TPL=[['blank','空白'],['dot','點點'],['grid','方格'],['line','橫線']];
+  var FS={3:42,7:62,14:92};
   function drawBlock(t,b,box){
     if(!Array.isArray(b.strokes)){ b.strokes=[]; if(b.src){ b.bg=b.src } b.src=undefined }
-    var st={color:PENS[0],size:SIZES[0],mode:'pen'}, hist=[], bgImg=null;
-    var tools=el('div','mm-dtools'), cv=el('canvas'); cv.width=DW; cv.height=DH; var ctx=cv.getContext('2d');
+    var H=b.h||DH, HMAX=DH*8, st={color:PENS[0],size:SIZES[0],mode:'pen'}, hist=[], bgImg=null, FONT=getComputedStyle(document.body).fontFamily;
+    var tools=el('div','mm-dtools'), wrap=el('div','mm-cvwrap'), bgc=el('canvas','bgc'), cv=el('canvas','ink');
+    var bctx=bgc.getContext('2d'), ctx=cv.getContext('2d'), tbox=new Map();
+    function size(){ bgc.width=cv.width=DW; bgc.height=cv.height=H; wrap.style.aspectRatio=DW+'/'+H }
+    size(); wrap.appendChild(bgc); wrap.appendChild(cv);
     function width(s){ return s.e? s.z*3+10 : s.z*1.6 }
-    function drawStroke(s){
-      var P=s.p; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle=ctx.fillStyle=s.e?BG:s.c; ctx.lineWidth=width(s);
+    // ---- 底稿 ----
+    function paintBg(){
+      bctx.fillStyle=BG; bctx.fillRect(0,0,DW,H); var g=b.tpl||'blank';
+      if(g==='dot'){ bctx.fillStyle='#cbbfb2'; for(var y=40;y<H;y+=40) for(var x=40;x<DW;x+=40){ bctx.beginPath(); bctx.arc(x,y,2.4,0,7); bctx.fill() } }
+      else if(g==='grid'){ bctx.strokeStyle='#e8ddd0'; bctx.lineWidth=1.4; bctx.beginPath(); for(var x2=40;x2<DW;x2+=40){bctx.moveTo(x2,0);bctx.lineTo(x2,H)} for(var y2=40;y2<H;y2+=40){bctx.moveTo(0,y2);bctx.lineTo(DW,y2)} bctx.stroke() }
+      else if(g==='line'){ bctx.strokeStyle='#d6e1ec'; bctx.lineWidth=1.6; bctx.beginPath(); for(var y3=72;y3<H;y3+=52){bctx.moveTo(0,y3);bctx.lineTo(DW,y3)} bctx.stroke();
+        bctx.strokeStyle='#f0c4bd'; bctx.beginPath(); bctx.moveTo(72,0); bctx.lineTo(72,H); bctx.stroke() }
+    }
+    // ---- 畫各種物件 ----
+    function rr(c,x,y,w,h,r){ if(w<0){x+=w;w=-w} if(h<0){y+=h;h=-h} r=Math.min(r,w/2,h/2); c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath() }
+    function drawItem(s){
+      ctx.globalCompositeOperation=s.e?'destination-out':'source-over';
+      ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle=ctx.fillStyle=s.e?'#000':s.c; ctx.lineWidth=width(s);
+      if(s.t==='text'){ var fs=FS[s.z]||40; ctx.font='500 '+fs+'px '+FONT; ctx.textBaseline='top'; var ls=String(s.s).split('\n'), w=0;
+        ls.forEach(function(L,i){ ctx.fillText(L,s.x,s.y+i*fs*1.3); w=Math.max(w,ctx.measureText(L).width) }); tbox.set(s,[s.x,s.y,w,ls.length*fs*1.3]); return }
+      if(s.t){ var A=s.a,B=s.b; ctx.beginPath();
+        if(s.t==='line'){ ctx.moveTo(A[0],A[1]); ctx.lineTo(B[0],B[1]) }
+        else if(s.t==='rect'){ ctx.rect(A[0],A[1],B[0]-A[0],B[1]-A[1]) }
+        else if(s.t==='rrect'){ rr(ctx,A[0],A[1],B[0]-A[0],B[1]-A[1],Math.max(14,Math.min(Math.abs(B[0]-A[0]),Math.abs(B[1]-A[1]))*0.18)) }
+        else if(s.t==='ellipse'){ ctx.ellipse((A[0]+B[0])/2,(A[1]+B[1])/2,Math.abs(B[0]-A[0])/2||.5,Math.abs(B[1]-A[1])/2||.5,0,0,Math.PI*2) }
+        ctx.stroke(); return }
+      var P=s.p;
       if(P.length===1){ ctx.beginPath(); ctx.arc(P[0][0],P[0][1],width(s)/2,0,7); ctx.fill(); return }
       ctx.beginPath(); ctx.moveTo(P[0][0],P[0][1]);
       for(var i=1;i<P.length-1;i++){ ctx.quadraticCurveTo(P[i][0],P[i][1],(P[i][0]+P[i+1][0])/2,(P[i][1]+P[i+1][1])/2) }
       ctx.lineTo(P[P.length-1][0],P[P.length-1][1]); ctx.stroke();
     }
-    function paint(){ ctx.fillStyle=BG; ctx.fillRect(0,0,DW,DH); if(bgImg) ctx.drawImage(bgImg,0,0,DW,DH); b.strokes.forEach(drawStroke) }
+    function paint(extra){ ctx.globalCompositeOperation='source-over'; ctx.clearRect(0,0,DW,H); if(bgImg) ctx.drawImage(bgImg,0,0,DW,DH);
+      b.strokes.forEach(function(s){ if(s!==editing) drawItem(s) }); if(extra) drawItem(extra); ctx.globalCompositeOperation='source-over' }
     if(b.bg){ var im=new Image(); im.onload=function(){bgImg=im;paint()}; im.src=b.bg }
-    paint();
+    paintBg(); paint();
     function snap(){ hist.push({s:b.strokes.slice(),bg:b.bg}); if(hist.length>30) hist.shift() }
     function save(){ persist(t) }
-    function tb(cls,html,lab,fn,key){ var x=el('button',cls); x.type='button'; x.innerHTML=html; x.title=lab; x.setAttribute('aria-label',lab); if(key) x.dataset.k=key; x.onclick=fn; tools.appendChild(x); return x }
-    function refresh(){ [].forEach.call(tools.children,function(x){
-      x.classList.toggle('on', !!(st.mode==='pen'&&x.dataset.c===st.color || x.dataset.s===String(st.size)&&st.mode!=='obj' || x.dataset.k&&x.dataset.k===st.mode)) });
-      cv.style.cursor=st.mode==='obj'?'pointer':'crosshair' }
-    PENS.forEach(function(c){ var x=tb('sw','','畫筆顏色',function(){st.color=c;st.mode='pen';refresh()}); x.style.background=c; x.dataset.c=c });
-    tools.appendChild(el('span','sep'));
-    SIZES.forEach(function(z){ var x=tb('sz','<i style="width:'+(4+z)+'px;height:'+(4+z)+'px"></i>','粗細',function(){st.size=z;if(st.mode==='obj')st.mode='pen';refresh()}); x.dataset.s=z });
-    tools.appendChild(el('span','sep'));
-    tb('tl',ICO.erase+'<span>擦除</span>','橡皮擦：擦掉經過的地方',function(){st.mode=st.mode==='erase'?'pen':'erase';refresh()},'erase');
-    tb('tl',ICO.obj+'<span>整筆擦</span>','整筆擦：碰到哪一筆就整筆刪掉',function(){st.mode=st.mode==='obj'?'pen':'obj';refresh()},'obj');
-    tb('tl',ICO.undo+'<span>復原</span>','復原上一步',function(){ var h=hist.pop(); if(!h) return; b.strokes=h.s; if(h.bg!==b.bg){b.bg=h.bg; bgImg=null; if(b.bg){var im2=new Image(); im2.onload=function(){bgImg=im2;paint()}; im2.src=b.bg}} paint(); save() });
-    tb('tl',ICO.clear+'<span>清空</span>','清空畫布',function(){ if(!b.strokes.length&&!b.bg) return; snap(); b.strokes=[]; b.bg=undefined; bgImg=null; paint(); save() });
+    // ---- 工具列 ----
+    function row(){ var r=el('div','mm-drow'); tools.appendChild(r); return r }
+    function tb(r,cls,html,lab,fn,key){ var x=el('button',cls); x.type='button'; x.innerHTML=html; x.title=lab; x.setAttribute('aria-label',lab); if(key) x.dataset.k=key; x.onclick=fn; r.appendChild(x); return x }
+    var DRAWS={pen:1,line:1,rect:1,rrect:1,ellipse:1,text:1};
+    function refresh(){ [].forEach.call(tools.querySelectorAll('button'),function(x){
+      x.classList.toggle('on', !!(DRAWS[st.mode]&&x.dataset.c===st.color || x.dataset.s===String(st.size)&&st.mode!=='obj' || x.dataset.k&&x.dataset.k===st.mode)) });
+      cv.style.cursor=st.mode==='obj'?'pointer':st.mode==='text'?'text':'crosshair' }
+    function setMode(m){ commitText(); st.mode=m; refresh() }
+    var r1=row();
+    PENS.forEach(function(c){ var x=tb(r1,'sw','','顏色',function(){st.color=c;if(!DRAWS[st.mode])st.mode='pen';if(editing){editing.c=c;ta.style.color=c}refresh()}); x.style.background=c; x.dataset.c=c });
+    r1.appendChild(el('span','sep'));
+    SIZES.forEach(function(z){ var x=tb(r1,'sz','<i style="width:'+(4+z)+'px;height:'+(4+z)+'px"></i>','粗細／字級',function(){st.size=z;if(st.mode==='obj')st.mode='pen';if(editing){editing.z=z;placeTa()}refresh()}); x.dataset.s=z });
+    var r2=row();
+    [['pen','畫筆'],['line','直線'],['rect','方框'],['rrect','圓角框'],['ellipse','圓形'],['text','文字']].forEach(function(m){ tb(r2,'tl ic',ICO[m[0]],m[1],function(){setMode(m[0])},m[0]) });
+    r2.appendChild(el('span','sep'));
+    tb(r2,'tl',ICO.erase+'<span>擦除</span>','橡皮擦：擦掉經過的地方',function(){setMode(st.mode==='erase'?'pen':'erase')},'erase');
+    tb(r2,'tl',ICO.obj+'<span>整筆擦</span>','整筆擦：碰到哪一筆（線條、圖形、文字）就整個刪掉',function(){setMode(st.mode==='obj'?'pen':'obj')},'obj');
+    var r3=row();
+    tb(r3,'tl',ICO.undo+'<span>復原</span>','復原上一步',function(){ commitText(); var h=hist.pop(); if(!h) return; b.strokes=h.s; if(h.bg!==b.bg){b.bg=h.bg; bgImg=null; if(b.bg){var im2=new Image(); im2.onload=function(){bgImg=im2;paint()}; im2.src=b.bg}} paint(); save() });
+    tb(r3,'tl',ICO.clear+'<span>清空</span>','清空畫布',function(){ commitText(); if(!b.strokes.length&&!b.bg) return; snap(); b.strokes=[]; b.bg=undefined; bgImg=null; paint(); save() });
+    var sel=el('select','mm-tpl'); sel.setAttribute('aria-label','底稿');
+    TPL.forEach(function(x){ var o=el('option',null,'底稿：'+x[1]); o.value=x[0]; sel.appendChild(o) }); sel.value=b.tpl||'blank';
+    sel.onchange=function(){ b.tpl=sel.value==='blank'?undefined:sel.value; paintBg(); save() }; r3.appendChild(sel);
+    tb(r3,'tl',ICO.ext+'<span>往下延伸</span>','畫布往下加長',function(){
+      commitText(); if(H>=HMAX){toast('畫布已經最長了');return}
+      H=Math.min(HMAX,H+DH); b.h=H; size(); paintBg(); paint(); save();
+      var r=wrap.getBoundingClientRect(), sc=box.classList.contains('mm-full')?box:null, dy=r.bottom-(sc?sc.clientHeight:window.innerHeight)+40;
+      if(dy>0){ if(sc) sc.scrollBy({top:dy,behavior:'smooth'}); else window.scrollBy({top:dy,behavior:'smooth'}) } });
+    var fs=tb(r3,'tl',ICO.full+'<span>全螢幕</span>','全螢幕畫畫',function(){ commitText(); setFull(!box.classList.contains('mm-full')) });
+    function setFull(on){
+      box.classList.toggle('mm-full',on); document.documentElement.classList.toggle('mm-noscroll',on);
+      fs.innerHTML=(on?ICO.exit+'<span>完成</span>':ICO.full+'<span>全螢幕</span>');
+      if(on){ box.scrollTop=0; document.addEventListener('keydown',esc) } else { document.removeEventListener('keydown',esc); box.scrollIntoView({block:'nearest'}) }
+    }
+    function esc(e){ if(e.key==='Escape'&&!editing) setFull(false) }
     refresh();
-    var cur=null, pid=null, hit=false;
-    function pos(e){ var r=cv.getBoundingClientRect(); return [Math.round((e.clientX-r.left)*DW/r.width*10)/10,Math.round((e.clientY-r.top)*DH/r.height*10)/10] }
-    function near(s,q){ var R=width(s)/2+16, P=s.p;
+    // ---- 文字方塊 ----
+    var editing=null, isNew=false, before=null, ta=el('textarea','mm-cvtext'); ta.rows=1; ta.setAttribute('aria-label','文字方塊');
+    function placeTa(){ if(!editing) return; var k=wrap.clientWidth/DW, f=(FS[editing.z]||40)*k;
+      ta.style.left=(editing.x*k)+'px'; ta.style.top=(editing.y*k)+'px'; ta.style.fontSize=f+'px'; ta.style.lineHeight='1.3'; ta.style.color=editing.c; ta.style.fontFamily=FONT;
+      ta.style.height='auto'; ta.style.height=ta.scrollHeight+'px'; ta.style.width='auto'; ta.style.width=Math.min(wrap.clientWidth-editing.x*k-4,Math.max(80,ta.scrollWidth+12))+'px' }
+    ta.oninput=placeTa;
+    ta.addEventListener('blur',function(){ setTimeout(commitText,0) });
+    ta.addEventListener('keydown',function(e){ if(e.key==='Escape'){ e.preventDefault(); ta.blur() } });
+    function startText(s,fresh){ commitText(); editing=s; isNew=fresh; before=b.strokes.slice(); ta.value=s.s||''; wrap.appendChild(ta); paint(); placeTa(); ta.focus() }
+    function commitText(){
+      if(!editing) return; var s=editing, v=ta.value.replace(/\s+$/,''); editing=null; if(ta.parentNode) ta.remove();
+      var idx=b.strokes.indexOf(s);
+      if(!v){ if(idx>=0){ hist.push({s:before,bg:b.bg}); b.strokes=b.strokes.filter(function(x){return x!==s}); save() } paint(); return }
+      if(v!==s.s||isNew){ hist.push({s:before,bg:b.bg}); var n={t:'text',c:s.c,z:s.z,x:s.x,y:s.y,s:v}; b.strokes=idx>=0?b.strokes.map(function(x){return x===s?n:x}):b.strokes.concat([n]); save() }
+      paint();
+    }
+    // ---- 擦除判斷 ----
+    function outline(s){ var A=s.a,B=s.b,P=[];
+      if(s.t==='line') return [A,B];
+      if(s.t==='ellipse'){ var cx=(A[0]+B[0])/2,cy=(A[1]+B[1])/2,rx=Math.abs(B[0]-A[0])/2,ry=Math.abs(B[1]-A[1])/2; for(var i=0;i<=36;i++){var a=i/36*Math.PI*2;P.push([cx+rx*Math.cos(a),cy+ry*Math.sin(a)])} return P }
+      return [[A[0],A[1]],[B[0],A[1]],[B[0],B[1]],[A[0],B[1]],[A[0],A[1]]] }
+    function near(s,q){
+      if(s.t==='text'){ var bb=tbox.get(s); return bb&&q[0]>=bb[0]-10&&q[0]<=bb[0]+bb[2]+10&&q[1]>=bb[1]-10&&q[1]<=bb[1]+bb[3]+10 }
+      var R=width(s)/2+16, P=s.t?outline(s):s.p;
       for(var i=0;i<P.length;i++){ var a=P[i], c=P[i+1]||a, dx=c[0]-a[0], dy=c[1]-a[1], L=dx*dx+dy*dy, u=L?Math.max(0,Math.min(1,((q[0]-a[0])*dx+(q[1]-a[1])*dy)/L)):0;
         var x=a[0]+u*dx-q[0], y=a[1]+u*dy-q[1]; if(x*x+y*y<=R*R) return true } return false }
+    var hit=false;
     function objErase(q){ var keep=b.strokes.filter(function(s){ return s.e||!near(s,q) });
       if(keep.length!==b.strokes.length){ if(!hit){snap();hit=true} b.strokes=keep; paint() } }
+    // ---- 觸控／滑鼠 ----
+    var cur=null, pid=null, touches={}, pan=null, down=null;
+    function pos(e){ var r=cv.getBoundingClientRect(); return [Math.round((e.clientX-r.left)*DW/r.width*10)/10,Math.round((e.clientY-r.top)*H/r.height*10)/10] }
     function seg(){ var P=cur.p, n=P.length; if(n<2) return; var a=P[n-3]||P[n-2], p=P[n-2], q=P[n-1];
-      ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle=cur.e?BG:cur.c; ctx.lineWidth=width(cur);
-      ctx.beginPath(); ctx.moveTo((a[0]+p[0])/2,(a[1]+p[1])/2); ctx.quadraticCurveTo(p[0],p[1],(p[0]+q[0])/2,(p[1]+q[1])/2); ctx.stroke() }
-    cv.addEventListener('pointerdown',function(e){ if(pid!==null) return; e.preventDefault(); pid=e.pointerId; try{cv.setPointerCapture(pid)}catch(_){}
-      var q=pos(e);
+      ctx.globalCompositeOperation=cur.e?'destination-out':'source-over';
+      ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle=cur.e?'#000':cur.c; ctx.lineWidth=width(cur);
+      ctx.beginPath(); ctx.moveTo((a[0]+p[0])/2,(a[1]+p[1])/2); ctx.quadraticCurveTo(p[0],p[1],(p[0]+q[0])/2,(p[1]+q[1])/2); ctx.stroke();
+      ctx.globalCompositeOperation='source-over' }
+    function scroller(){ return box.classList.contains('mm-full')?box:null }
+    function midY(){ var ys=Object.keys(touches).map(function(k){return touches[k]}); return ys.reduce(function(a,c){return a+c},0)/ys.length }
+    cv.addEventListener('pointerdown',function(e){
+      if(e.pointerType==='touch') touches[e.pointerId]=e.clientY;
+      if(e.pointerType==='touch'&&Object.keys(touches).length>=2){
+        e.preventDefault(); if(cur){ cur=null; paint() } if(st.mode==='obj'&&hit){ save() } pid=null; down=null; pan={y:midY()}; return }
+      if(pid!==null||pan) return;
+      if(editing){ e.preventDefault(); commitText(); return }
+      e.preventDefault(); pid=e.pointerId; try{cv.setPointerCapture(pid)}catch(_){}
+      var q=pos(e); down=q;
+      if(st.mode==='text') return;
       if(st.mode==='obj'){ hit=false; objErase(q); return }
-      cur={c:st.color,z:st.size,e:st.mode==='erase'?1:0,p:[q]};
-      ctx.fillStyle=cur.e?BG:cur.c; ctx.beginPath(); ctx.arc(q[0],q[1],width(cur)/2,0,7); ctx.fill() });
-    cv.addEventListener('pointermove',function(e){ if(e.pointerId!==pid) return;
+      if(st.mode==='pen'||st.mode==='erase'){
+        cur={c:st.color,z:st.size,e:st.mode==='erase'?1:0,p:[q]};
+        ctx.globalCompositeOperation=cur.e?'destination-out':'source-over'; ctx.fillStyle=cur.e?'#000':cur.c; ctx.beginPath(); ctx.arc(q[0],q[1],width(cur)/2,0,7); ctx.fill(); ctx.globalCompositeOperation='source-over'; return }
+      cur={t:st.mode,c:st.color,z:st.size,a:q,b:q};
+    });
+    cv.addEventListener('pointermove',function(e){
+      if(e.pointerId in touches) touches[e.pointerId]=e.clientY;
+      if(pan){ var m=midY(), dy=m-pan.y; pan.y=m; var sc=scroller(); if(sc) sc.scrollTop-=dy; else window.scrollBy(0,-dy); return }
+      if(e.pointerId!==pid) return;
+      if(st.mode==='obj'){ objErase(pos(e)); return }
+      if(!cur) return;
+      if(cur.t){ cur.b=pos(e); paint(cur); return }
       var evs=e.getCoalescedEvents?e.getCoalescedEvents():[]; if(!evs.length) evs=[e];
-      evs.forEach(function(ev){ var q=pos(ev); if(st.mode==='obj'){objErase(q);return} var L=cur.p[cur.p.length-1]; if(Math.abs(L[0]-q[0])+Math.abs(L[1]-q[1])<1.5) return; cur.p.push(q); seg() }) });
-    function end(e){ if(e.pointerId!==pid) return; pid=null;
+      evs.forEach(function(ev){ var q=pos(ev), L=cur.p[cur.p.length-1]; if(Math.abs(L[0]-q[0])+Math.abs(L[1]-q[1])<1.5) return; cur.p.push(q); seg() }) });
+    function end(e){
+      delete touches[e.pointerId];
+      if(pan){ if(!Object.keys(touches).length) pan=null; return }
+      if(e.pointerId!==pid) return; pid=null;
       if(st.mode==='obj'){ if(hit) save(); return }
-      if(cur){ snap(); b.strokes=b.strokes.concat([cur]); cur=null; paint(); save() } }
+      if(st.mode==='text'){ if(e.type==='pointerup'&&down){ var q=down, ex=null;
+          b.strokes.forEach(function(s){ if(s.t==='text'&&near(s,q)) ex=s });
+          startText(ex||{t:'text',c:st.color,z:st.size,x:q[0],y:Math.max(0,q[1]-(FS[st.size]||40)*0.6),s:''},!ex) } down=null; return }
+      if(cur){ var c=cur; cur=null;
+        if(c.t&&Math.abs(c.a[0]-c.b[0])+Math.abs(c.a[1]-c.b[1])<6){ paint(); return }
+        snap(); b.strokes=b.strokes.concat([c]); paint(); save() } }
     cv.addEventListener('pointerup',end); cv.addEventListener('pointercancel',end);
-    box.appendChild(tools); box.appendChild(cv);
+    box.appendChild(tools); box.appendChild(wrap);
+    window.addEventListener('resize',placeTa);
   }
   function block(t,b,i){
     var box=el('div','mm-b'+(b.type==='img'?' mm-img':'')+(b.type==='draw'?' mm-draw':''));
